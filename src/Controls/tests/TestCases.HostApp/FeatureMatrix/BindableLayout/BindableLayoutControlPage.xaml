@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maui.Controls.Sample"
+             x:Class="Maui.Controls.Sample.BindableLayoutControlMainPage"
+             x:DataType="local:BindableLayoutViewModel"
+             Title="BindableLayoutControlPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Options"
+                     Clicked="NavigateToOptionsPage_Clicked"
+                     AutomationId="Options"/>
+    </ContentPage.ToolbarItems>
+    <VerticalStackLayout>
+        <Label Text="StackLayout with BindableLayout"
+               FontAttributes="Bold"
+               FontSize="16"
+               HorizontalOptions="Center"/>
+    <StackLayout x:Name="MainStackBindableLayout"
+             BindableLayout.ItemsSource="{Binding ItemsSource}"
+             BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+             BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+             BindableLayout.EmptyView="{Binding EmptyView}"
+             BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+        </StackLayout>
+        <Label Text="FlexLayout with BindableLayout"
+               FontAttributes="Bold"
+               FontSize="16"
+               HorizontalOptions="Center"/>
+    <FlexLayout x:Name="MainFlexBindableLayout"
+             Direction="Row"
+             BindableLayout.ItemsSource="{Binding ItemsSource}"
+             BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+             BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+             BindableLayout.EmptyView="{Binding EmptyView}"
+             BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+        </FlexLayout>
+    </VerticalStackLayout>
+</ContentPage>
