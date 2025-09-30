@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maui.Controls.Sample"
              x:Class="Maui.Controls.Sample.BindableLayoutControlMainPage"
-             x:DataType="local:BindableLayoutViewModel"
              Title="BindableLayoutControlPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Options"
@@ -15,24 +14,39 @@
                FontAttributes="Bold"
                FontSize="16"
                HorizontalOptions="Center"/>
-    <StackLayout x:Name="MainStackBindableLayout"
-             BindableLayout.ItemsSource="{Binding ItemsSource}"
-             BindableLayout.ItemTemplate="{Binding ItemTemplate}"
-             BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
-             BindableLayout.EmptyView="{Binding EmptyView}"
-             BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+        <StackLayout x:Name="MainStackBindableLayout"
+                     BindableLayout.ItemsSource="{Binding ItemsSource}"
+                     BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+                     BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+                     BindableLayout.EmptyView="{Binding EmptyView}"
+                     BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
         </StackLayout>
         <Label Text="FlexLayout with BindableLayout"
                FontAttributes="Bold"
                FontSize="16"
                HorizontalOptions="Center"/>
-    <FlexLayout x:Name="MainFlexBindableLayout"
-             Direction="Row"
-             BindableLayout.ItemsSource="{Binding ItemsSource}"
-             BindableLayout.ItemTemplate="{Binding ItemTemplate}"
-             BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
-             BindableLayout.EmptyView="{Binding EmptyView}"
-             BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+        <FlexLayout x:Name="MainFlexBindableLayout"
+                    Direction="Row"
+                    BindableLayout.ItemsSource="{Binding ItemsSource}"
+                    BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+                    BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+                    BindableLayout.EmptyView="{Binding EmptyView}"
+                    BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
         </FlexLayout>
+
+        <Label Text="AbsoluteLayout (created in code)"
+               FontAttributes="Bold"
+               FontSize="16"
+               HorizontalOptions="Center"/>
+        <!-- placeholder to host AbsoluteLayout created in code-behind -->
+        <ContentView x:Name="AbsoluteContainer" HeightRequest="200" />
+
+        <Label Text="Grid (created in code)"
+               FontAttributes="Bold"
+               FontSize="16"
+               HorizontalOptions="Center"/>
+        <!-- placeholder to host Grid created in code-behind -->
+        <ContentView x:Name="GridContainer" />
+
     </VerticalStackLayout>
 </ContentPage>

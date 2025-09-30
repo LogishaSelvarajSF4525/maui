@@ -19,6 +19,7 @@
             <RadioButton x:Name="ItemsSourceNone"
                          Content="None"
                          FontSize="10"
+                         IsChecked="True"
                          GroupName="ItemsSourceGroup"
                          CheckedChanged="OnItemsSourceChanged"
                          AutomationId="ItemsSourceNone"/>
@@ -117,7 +118,7 @@
                          FontSize="11"
                          AutomationId="ItemTemplateSelectorNone"/>
             <RadioButton x:Name="ItemTemplateSelectorAlternate"
-                         Content="Alternate Selector"
+                         Content="Data Template Selector"
                          GroupName="ItemTemplateSelectorGroup"
                          CheckedChanged="OnItemTemplateSelectorChanged"
                          FontSize="11"

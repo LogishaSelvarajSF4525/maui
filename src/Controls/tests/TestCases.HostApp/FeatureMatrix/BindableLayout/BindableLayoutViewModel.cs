@@ -15,8 +15,8 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 	private DataTemplate _itemTemplate;
 	private DataTemplateSelector _itemTemplateSelector;
 	private ItemsSourceType _itemsSourceType = ItemsSourceType.ObservableCollectionT;
-	private ObservableCollection<CollectionViewTestItem> _observableCollection;
-	private ObservableCollection<CollectionViewTestItem> _emptyObservableCollection;
+	private ObservableCollection<BindableLayoutTestItem> _observableCollection;
+	private ObservableCollection<BindableLayoutTestItem> _emptyObservableCollection;
 
 	public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,25 +41,6 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 				stackLayout.Children.Add(label);
 				return stackLayout;
 			});
-
-		// Default selector uses two simple templates alternating by index
-		ItemTemplateSelector = new CustomDataTemplateSelector
-		{
-			Template1 = new DataTemplate(() =>
-			{
-				var lbl = new Label { TextColor = Colors.Black };
-				lbl.SetBinding(Label.TextProperty, "Caption");
-				return lbl;
-			}),
-			Template2 = new DataTemplate(() =>
-			{
-				var grid = new Grid { BackgroundColor = Colors.LightGray, Padding = new Thickness(6) };
-				var lbl = new Label { TextColor = Colors.Blue };
-				lbl.SetBinding(Label.TextProperty, "Caption");
-				grid.Children.Add(lbl);
-				return grid;
-			})
-		};
 	}
 
 	public object EmptyView
@@ -88,7 +69,6 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 			if (_itemTemplateSelector != value)
 			{
 				_itemTemplateSelector = value;
-				// prevent both ItemTemplate and ItemTemplateSelector being set; if selector is set, clear template
 				if (_itemTemplateSelector != null && _itemTemplate != null)
 				{
 					_itemTemplate = null;
@@ -129,14 +109,14 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 
 	private void LoadItems()
 	{
-		_observableCollection = new ObservableCollection<CollectionViewTestItem>();
+		_observableCollection = new ObservableCollection<BindableLayoutTestItem>();
 		AddItems(_observableCollection, 2, "Fruits");
 		AddItems(_observableCollection, 3, "Vegetables");
 
-		_emptyObservableCollection = new ObservableCollection<CollectionViewTestItem>();
+		_emptyObservableCollection = new ObservableCollection<BindableLayoutTestItem>();
 	}
 
-	private void AddItems(IList<CollectionViewTestItem> list, int count, string category)
+	private void AddItems(IList<BindableLayoutTestItem> list, int count, string category)
 	{
 		string[] fruits =
 		{
@@ -160,7 +140,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 
 		for (int n = 0; n < count; n++)
 		{
-			list.Add(new CollectionViewTestItem(items[n % items.Length], n));
+			list.Add(new BindableLayoutTestItem(items[n % items.Length], n));
 		}
 	}
 
@@ -176,7 +156,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 
 		protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
 		{
-			if (item is CollectionViewTestItem testItem)
+			if (item is BindableLayoutTestItem testItem)
 			{
 				return testItem.Index % 2 == 0 ? Template1 : Template2;
 			}
@@ -185,15 +165,5 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		}
 	}
 
-	public class CollectionViewTestItem
-	{
-		public string Caption { get; set; }
-		public int Index { get; set; }
 
-		public CollectionViewTestItem(string caption, int index)
-		{
-			Caption = caption;
-			Index = index;
-		}
-	}
 }
