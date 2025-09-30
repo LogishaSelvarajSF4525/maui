@@ -139,7 +139,6 @@ public partial class BindableLayoutOptionsPage : ContentPage
 			}
 			else if (radioButton == ItemTemplateSelectorAlternate)
 			{
-				// use the view model's built-in selector (already created in constructor)
 				_viewModel.ItemTemplateSelector = _viewModel.ItemTemplateSelector ?? new BindableLayoutViewModel.CustomDataTemplateSelector
 				{
 					Template1 = new DataTemplate(() => { var lbl = new Label(); lbl.SetBinding(Label.TextProperty, "Caption"); return lbl; }),
