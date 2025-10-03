@@ -338,12 +338,8 @@ public class BrushesViewModel : INotifyPropertyChanged
 			if (BrushTarget is LinearGradientBrush lgb)
 			{
 				float offset = Math.Min(1.0f, (float)(lgb.GradientStops.Count * 0.2));
-				var newStops = new GradientStopCollection();
-				foreach (var s in lgb.GradientStops)
-					newStops.Add(new GradientStop(s.Color, s.Offset));
-				newStops.Add(new GradientStop(Colors.Yellow, offset));
-				BrushTarget = BuildLinear(newStops, lgb.StartPoint, lgb.EndPoint);
-				LinearGradientStopCount = newStops.Count;
+				lgb.GradientStops.Add(new GradientStop(Colors.Yellow, offset));
+				LinearGradientStopCount = lgb.GradientStops.Count;
 				OnPropertyChanged(nameof(LinearGradientStopCount));
 			}
 		});
@@ -353,7 +349,6 @@ public class BrushesViewModel : INotifyPropertyChanged
 			if (BrushTarget is LinearGradientBrush lgb && lgb.GradientStops.Count > 0)
 			{
 				lgb.GradientStops.RemoveAt(lgb.GradientStops.Count - 1);
-				BrushTarget = BuildLinear(lgb.GradientStops, lgb.StartPoint, lgb.EndPoint);
 				LinearGradientStopCount = lgb.GradientStops.Count;
 				OnPropertyChanged(nameof(LinearGradientStopCount));
 			}
@@ -363,14 +358,9 @@ public class BrushesViewModel : INotifyPropertyChanged
 		{
 			if (BrushTarget is RadialGradientBrush rgb)
 			{
-				// compute a safe offset for the new stop (keep in [0,1])
 				float offset = Math.Min(1.0f, (float)(rgb.GradientStops.Count * 0.2));
-				var newStops = new GradientStopCollection();
-				foreach (var s in rgb.GradientStops)
-					newStops.Add(new GradientStop(s.Color, s.Offset));
-				newStops.Add(new GradientStop(Colors.Yellow, offset));
-				BrushTarget = BuildRadial(newStops, rgb.Center, rgb.Radius);
-				RadialGradientStopCount = newStops.Count;
+				rgb.GradientStops.Add(new GradientStop(Colors.Yellow, offset));
+				RadialGradientStopCount = rgb.GradientStops.Count;
 				OnPropertyChanged(nameof(RadialGradientStopCount));
 			}
 		});
@@ -380,7 +370,6 @@ public class BrushesViewModel : INotifyPropertyChanged
 			if (BrushTarget is RadialGradientBrush rgb && rgb.GradientStops.Count > 0)
 			{
 				rgb.GradientStops.RemoveAt(rgb.GradientStops.Count - 1);
-				BrushTarget = BuildRadial(rgb.GradientStops, rgb.Center, rgb.Radius);
 				RadialGradientStopCount = rgb.GradientStops.Count;
 				OnPropertyChanged(nameof(RadialGradientStopCount));
 			}
