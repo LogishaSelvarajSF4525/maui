@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 namespace Maui.Controls.Sample;
 
+
 public class BrushesViewModel : INotifyPropertyChanged
 {
 	private Brush brushTarget = new SolidColorBrush(Colors.Transparent);
@@ -34,6 +35,10 @@ public class BrushesViewModel : INotifyPropertyChanged
 	public ICommand ApplyAltLinearBrushCommand { get; }
 	public ICommand ApplyAltRadialBrushCommand { get; }
 	public ICommand CompareBrushesCommand { get; }
+	public ICommand AddLinearGradientStopCommand { get; }
+	public ICommand RemoveLinearGradientStopCommand { get; }
+	public ICommand AddRadialGradientStopCommand { get; }
+	public ICommand RemoveRadialGradientStopCommand { get; }
 
 	private string selectedColorName1 = "None";
 	private string selectedColorName2 = "None";
@@ -42,6 +47,9 @@ public class BrushesViewModel : INotifyPropertyChanged
 	public string SelectedColorName1 { get => selectedColorName1; set { if (selectedColorName1 == value) return; selectedColorName1 = value; OnPropertyChanged(); } }
 	public string SelectedColorName2 { get => selectedColorName2; set { if (selectedColorName2 == value) return; selectedColorName2 = value; OnPropertyChanged(); } }
 	public string CompareResult { get => compareResult; private set { if (compareResult == value) return; compareResult = value; OnPropertyChanged(); } }
+
+	public int LinearGradientStopCount { get; private set; }
+	public int RadialGradientStopCount { get; private set; }
 	public event PropertyChangedEventHandler PropertyChanged;
 
 	public Brush BrushTarget
@@ -123,6 +131,11 @@ public class BrushesViewModel : INotifyPropertyChanged
 			LinearStartY = start.Y;
 			LinearEndX = end.X;
 			LinearEndY = end.Y;
+			if (BrushTarget is LinearGradientBrush lgb)
+			{
+				LinearGradientStopCount = lgb.GradientStops.Count;
+				OnPropertyChanged(nameof(LinearGradientStopCount));
+			}
 		});
 
 		ApplyRadialGradientCommand = new Command(() =>
@@ -140,20 +153,25 @@ public class BrushesViewModel : INotifyPropertyChanged
 			RadialCenterX = center.X;
 			RadialCenterY = center.Y;
 			RadialRadius = radius;
+			if (BrushTarget is RadialGradientBrush rgb)
+			{
+				RadialGradientStopCount = rgb.GradientStops.Count;
+				OnPropertyChanged(nameof(RadialGradientStopCount));
+			}
 		});
 
 		ApplyNullBrushCommand = new Command(() => BrushTarget = null);
 
 		ApplySolidShadowCommand = new Command(() =>
-{
-	ShadowBrush = new Shadow
-	{
-		Brush = BuildSolid(Colors.DarkRed),
-		Radius = 40,
-		Opacity = 1.0f,
-		Offset = new Point(0, 6)
-	};
-});
+		{
+			ShadowBrush = new Shadow
+			{
+				Brush = BuildSolid(Colors.DarkRed),
+				Radius = 40,
+				Opacity = 1.0f,
+				Offset = new Point(0, 6)
+			};
+		});
 
 		ApplyLinearShadowCommand = new Command(() =>
 		{
@@ -272,6 +290,11 @@ public class BrushesViewModel : INotifyPropertyChanged
 			LinearStartY = start.Y;
 			LinearEndX = end.X;
 			LinearEndY = end.Y;
+			if (BrushTarget is LinearGradientBrush lgb)
+			{
+				LinearGradientStopCount = lgb.GradientStops.Count;
+				OnPropertyChanged(nameof(LinearGradientStopCount));
+			}
 		});
 
 		ApplyAltRadialBrushCommand = new Command(() =>
@@ -290,6 +313,11 @@ public class BrushesViewModel : INotifyPropertyChanged
 			RadialCenterX = center.X;
 			RadialCenterY = center.Y;
 			RadialRadius = radius;
+			if (BrushTarget is RadialGradientBrush rgb)
+			{
+				RadialGradientStopCount = rgb.GradientStops.Count;
+				OnPropertyChanged(nameof(RadialGradientStopCount));
+			}
 		});
 
 		CompareBrushesCommand = new Command(() =>
@@ -303,6 +331,59 @@ public class BrushesViewModel : INotifyPropertyChanged
 			CompareResult = equal && equalHash
 				? $"True"
 				: $"False";
+		});
+
+		AddLinearGradientStopCommand = new Command(() =>
+		{
+			if (BrushTarget is LinearGradientBrush lgb)
+			{
+				float offset = Math.Min(1.0f, (float)(lgb.GradientStops.Count * 0.2));
+				var newStops = new GradientStopCollection();
+				foreach (var s in lgb.GradientStops)
+					newStops.Add(new GradientStop(s.Color, s.Offset));
+				newStops.Add(new GradientStop(Colors.Yellow, offset));
+				BrushTarget = BuildLinear(newStops, lgb.StartPoint, lgb.EndPoint);
+				LinearGradientStopCount = newStops.Count;
+				OnPropertyChanged(nameof(LinearGradientStopCount));
+			}
+		});
+
+		RemoveLinearGradientStopCommand = new Command(() =>
+		{
+			if (BrushTarget is LinearGradientBrush lgb && lgb.GradientStops.Count > 0)
+			{
+				lgb.GradientStops.RemoveAt(lgb.GradientStops.Count - 1);
+				BrushTarget = BuildLinear(lgb.GradientStops, lgb.StartPoint, lgb.EndPoint);
+				LinearGradientStopCount = lgb.GradientStops.Count;
+				OnPropertyChanged(nameof(LinearGradientStopCount));
+			}
+		});
+
+		AddRadialGradientStopCommand = new Command(() =>
+		{
+			if (BrushTarget is RadialGradientBrush rgb)
+			{
+				// compute a safe offset for the new stop (keep in [0,1])
+				float offset = Math.Min(1.0f, (float)(rgb.GradientStops.Count * 0.2));
+				var newStops = new GradientStopCollection();
+				foreach (var s in rgb.GradientStops)
+					newStops.Add(new GradientStop(s.Color, s.Offset));
+				newStops.Add(new GradientStop(Colors.Yellow, offset));
+				BrushTarget = BuildRadial(newStops, rgb.Center, rgb.Radius);
+				RadialGradientStopCount = newStops.Count;
+				OnPropertyChanged(nameof(RadialGradientStopCount));
+			}
+		});
+
+		RemoveRadialGradientStopCommand = new Command(() =>
+		{
+			if (BrushTarget is RadialGradientBrush rgb && rgb.GradientStops.Count > 0)
+			{
+				rgb.GradientStops.RemoveAt(rgb.GradientStops.Count - 1);
+				BrushTarget = BuildRadial(rgb.GradientStops, rgb.Center, rgb.Radius);
+				RadialGradientStopCount = rgb.GradientStops.Count;
+				OnPropertyChanged(nameof(RadialGradientStopCount));
+			}
 		});
 	}
 
