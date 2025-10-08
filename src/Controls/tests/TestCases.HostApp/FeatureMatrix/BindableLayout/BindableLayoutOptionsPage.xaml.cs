@@ -20,26 +20,31 @@ public partial class BindableLayoutOptionsPage : ContentPage
 			if (EmptyViewNone.IsChecked)
 			{
 				_viewModel.EmptyView = null;
+				_viewModel.EmptyViewTemplate = null;
 			}
 			else if (EmptyViewString.IsChecked)
 			{
 				_viewModel.EmptyView = "No Items Available(String)";
+				_viewModel.EmptyViewTemplate = null;
 			}
 			else if (EmptyViewGrid.IsChecked)
 			{
-				Grid grid = new Grid
+				_viewModel.EmptyView = new DataTemplate(() =>
 				{
-					BackgroundColor = Colors.LightGray,
-					Padding = new Thickness(10),
-				};
-				grid.Children.Add(new Label
-				{
-					Text = "No Items Available(Grid View)",
-					HorizontalOptions = LayoutOptions.Center,
-					VerticalOptions = LayoutOptions.Center,
-					TextColor = Colors.Blue
+					var grid = new Grid
+					{
+						BackgroundColor = Colors.LightGray,
+						Padding = new Thickness(10),
+					};
+					grid.Children.Add(new Label
+					{
+						Text = "No Items Available(Grid View)",
+						HorizontalOptions = LayoutOptions.Center,
+						VerticalOptions = LayoutOptions.Center,
+						TextColor = Colors.Blue
+					});
+					return grid;
 				});
-				_viewModel.EmptyView = grid;
 			}
 		}
 

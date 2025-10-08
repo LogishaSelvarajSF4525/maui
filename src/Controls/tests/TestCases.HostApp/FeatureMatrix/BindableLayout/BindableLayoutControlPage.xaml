@@ -4,49 +4,64 @@
              xmlns:local="clr-namespace:Maui.Controls.Sample"
              x:Class="Maui.Controls.Sample.BindableLayoutControlMainPage"
              Title="BindableLayoutControlPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Options"
-                     Clicked="NavigateToOptionsPage_Clicked"
-                     AutomationId="Options"/>
-    </ContentPage.ToolbarItems>
-    <VerticalStackLayout>
-        <Label Text="StackLayout with BindableLayout"
-               FontAttributes="Bold"
-               FontSize="16"
-               HorizontalOptions="Center"/>
-        <StackLayout x:Name="MainStackBindableLayout"
-                     BindableLayout.ItemsSource="{Binding ItemsSource}"
-                     BindableLayout.ItemTemplate="{Binding ItemTemplate}"
-                     BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
-                     BindableLayout.EmptyView="{Binding EmptyView}"
-                     BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
-        </StackLayout>
-        <Label Text="FlexLayout with BindableLayout"
-               FontAttributes="Bold"
-               FontSize="16"
-               HorizontalOptions="Center"/>
-        <FlexLayout x:Name="MainFlexBindableLayout"
-                    Direction="Row"
-                    BindableLayout.ItemsSource="{Binding ItemsSource}"
-                    BindableLayout.ItemTemplate="{Binding ItemTemplate}"
-                    BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
-                    BindableLayout.EmptyView="{Binding EmptyView}"
-                    BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
-        </FlexLayout>
-
-        <Label Text="AbsoluteLayout (created in code)"
-               FontAttributes="Bold"
-               FontSize="16"
-               HorizontalOptions="Center"/>
-        <!-- placeholder to host AbsoluteLayout created in code-behind -->
-        <ContentView x:Name="AbsoluteContainer" HeightRequest="200" />
-
-        <Label Text="Grid (created in code)"
-               FontAttributes="Bold"
-               FontSize="16"
-               HorizontalOptions="Center"/>
-        <!-- placeholder to host Grid created in code-behind -->
-        <ContentView x:Name="GridContainer" />
-
-    </VerticalStackLayout>
+       <ContentPage.ToolbarItems>
+              <ToolbarItem Text="Options"
+                           Clicked="NavigateToOptionsPage_Clicked"
+                           AutomationId="Options"/>
+       </ContentPage.ToolbarItems>
+       <VerticalStackLayout Spacing="3">
+              <Label Text="StackLayout with BindableLayout"
+                     FontAttributes="Bold"
+                     FontSize="16"
+                     HorizontalOptions="Center"
+                     AutomationId="StackLayoutWithBindableLayout"/>
+              <StackLayout x:Name="MainStackBindableLayout"
+                           BindableLayout.ItemsSource="{Binding ItemsSource}"
+                           BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+                           BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+                           BindableLayout.EmptyView="{Binding EmptyView}"
+                           BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+              </StackLayout>
+              <Label Text="FlexLayout with BindableLayout"
+                     FontAttributes="Bold"
+                     FontSize="16"
+                     HorizontalOptions="Center"/>
+              <FlexLayout x:Name="MainFlexBindableLayout"
+                          Direction="Row"
+                          BindableLayout.ItemsSource="{Binding ItemsSource}"
+                          BindableLayout.ItemTemplate="{Binding ItemTemplate}"
+                          BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
+                          BindableLayout.EmptyView="{Binding EmptyView}"
+                          BindableLayout.EmptyViewTemplate="{Binding EmptyViewTemplate}">
+              </FlexLayout>
+              <BoxView HeightRequest="40"/>
+              <!--Add or Remove item based on Index-->
+              <Label Text="Enter Item Index:"
+                     FontAttributes="Bold"
+                     FontSize="11"
+                     Grid.Row="1"
+                     Grid.Column="0"/>
+              <local:UITestEntry  x:Name="IndexEntry"
+                                  Placeholder="Enter item index"
+                                  Grid.Row="1"
+                                  Grid.Column="1"
+                                  AutomationId="IndexEntry"
+                                  IsCursorVisible="false"/>
+              <!--Add or Remove Buttons -->
+              <Button Text="Add Item"
+                      Clicked="AddItems_Clicked"
+                      Grid.Row="2"
+                      Grid.Column="0"
+                      AutomationId="AddItems"/>
+              <Button Text="Remove Item"
+                      Clicked="RemoveItems_Clicked"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      AutomationId="RemoveItems"/>
+              <Button Text="Replace"
+                      Clicked="ReplaceItems_Clicked"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      AutomationId="ReplaceItems"/>
+       </VerticalStackLayout>
 </ContentPage>

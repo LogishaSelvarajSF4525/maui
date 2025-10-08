@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
@@ -14,9 +15,18 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 	private DataTemplate _emptyViewTemplate;
 	private DataTemplate _itemTemplate;
 	private DataTemplateSelector _itemTemplateSelector;
-	private ItemsSourceType _itemsSourceType = ItemsSourceType.ObservableCollectionT;
+	private ItemsSourceType _itemsSourceType = ItemsSourceType.None;
 	private ObservableCollection<BindableLayoutTestItem> _observableCollection;
 	private ObservableCollection<BindableLayoutTestItem> _emptyObservableCollection;
+
+
+	private readonly string[] _addSequenceFruits =
+	{
+		"Dragonfruit", "Passionfruit", "Starfruit", "Rambutan", "Durian", "Persimmon"
+	};
+	private int _addIndex = 0;
+
+	public ICommand AddItemCommand { get; }
 
 	public event PropertyChangedEventHandler PropertyChanged;
 
@@ -41,6 +51,8 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 				stackLayout.Children.Add(label);
 				return stackLayout;
 			});
+
+		AddItemCommand = new Command(AddItem);
 	}
 
 	public object EmptyView
@@ -116,6 +128,111 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		_emptyObservableCollection = new ObservableCollection<BindableLayoutTestItem>();
 	}
 
+	private void AddItem()
+	{
+		var newItem = new BindableLayoutTestItem($"NewItem {_addIndex}", _addIndex);
+		_addIndex++;
+
+		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		{
+			_observableCollection.Insert(0, newItem);
+		}
+
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+	public void AddSequentialItem()
+	{
+		if (_addIndex >= _addSequenceFruits.Length)
+			_addIndex = 0;
+
+		var fruitName = _addSequenceFruits[_addIndex++];
+		var newItem = new BindableLayoutTestItem(fruitName, _addIndex - 1);
+
+		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		{
+			_observableCollection.Insert(0, newItem);
+		}
+
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+	public void RemoveLastItem()
+	{
+		object deletedItem = null;
+		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null && _observableCollection.Count > 0)
+		{
+			deletedItem = _observableCollection[^1];
+			_observableCollection.RemoveAt(_observableCollection.Count - 1);
+		}
+
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+	public void AddItemAtIndex(int index)
+	{
+		string[] fruits = { "Kiwi", "Guava", "Chikoo", "Raseberry", "Papaya", "Pineapple", "Strawberry", "Blueberry", "Peach", "Cherry" };
+		string sequentialItem = fruits[index % fruits.Length];
+
+		switch (ItemsSourceType)
+		{
+			case ItemsSourceType.ObservableCollectionT:
+				if (index >= 0 && _observableCollection != null && index <= _observableCollection.Count)
+				{
+					_observableCollection.Insert(index, new BindableLayoutTestItem(sequentialItem, index));
+				}
+				break;
+		}
+
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+	public void RemoveItemAtIndex(int index)
+	{
+		object deletedItem = null;
+		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		{
+			if (index >= 0 && index < _observableCollection.Count)
+			{
+				deletedItem = _observableCollection[index];
+				_observableCollection.RemoveAt(index);
+			}
+		}
+
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+	private readonly string[] _replaceSequenceAnimals = { "Cat", "Dog", "Monkey", "Deer", "Bear", "Lion", "Tiger", "Elephant", "Fox", "Zebra" };
+	private int _replaceIndex = 0;
+	public void ReplaceItem()
+	{
+		if (ItemsSourceType != ItemsSourceType.ObservableCollectionT ||
+			_observableCollection == null || _observableCollection.Count == 0)
+			return;
+
+		if (_replaceIndex >= _observableCollection.Count)
+			_replaceIndex = 0;
+
+		var newCaption = _replaceSequenceAnimals[_replaceIndex % _replaceSequenceAnimals.Length];
+		_observableCollection[_replaceIndex] = new BindableLayoutTestItem(newCaption, _replaceIndex);
+
+		_replaceIndex++;
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+	public void ReplaceItemAtIndex(int index)
+	{
+		if (ItemsSourceType != ItemsSourceType.ObservableCollectionT ||
+			_observableCollection == null || index < 0 || index >= _observableCollection.Count)
+			return;
+
+		var newItem = new BindableLayoutTestItem(
+			_replaceSequenceAnimals[index % _replaceSequenceAnimals.Length], index);
+
+		_observableCollection[index] = newItem;
+		OnPropertyChanged(nameof(ItemsSource));
+	}
+
+
 	private void AddItems(IList<BindableLayoutTestItem> list, int count, string category)
 	{
 		string[] fruits =
@@ -164,6 +281,4 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 			return Template1;
 		}
 	}
-
-
 }
