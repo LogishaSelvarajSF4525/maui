@@ -29,22 +29,20 @@ public partial class BindableLayoutOptionsPage : ContentPage
 			}
 			else if (EmptyViewGrid.IsChecked)
 			{
-				_viewModel.EmptyView = new DataTemplate(() =>
+				var grid = new StackLayout
 				{
-					var grid = new Grid
-					{
-						BackgroundColor = Colors.LightGray,
-						Padding = new Thickness(10),
-					};
-					grid.Children.Add(new Label
-					{
-						Text = "No Items Available(Grid View)",
-						HorizontalOptions = LayoutOptions.Center,
-						VerticalOptions = LayoutOptions.Center,
-						TextColor = Colors.Blue
-					});
-					return grid;
+					BackgroundColor = Colors.LightGray,
+					Padding = new Thickness(10),
+				};
+				grid.Children.Add(new Label
+				{
+					Text = "No Items Available(Grid View)",
+					HorizontalOptions = LayoutOptions.Center,
+					VerticalOptions = LayoutOptions.Center,
+					TextColor = Colors.Blue
 				});
+				_viewModel.EmptyView = grid;
+				_viewModel.EmptyViewTemplate = null;
 			}
 		}
 

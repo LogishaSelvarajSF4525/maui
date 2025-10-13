@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Maui.Controls.Sample"
              x:Class="Maui.Controls.Sample.BindableLayoutControlMainPage"
+             x:DataType="local:BindableLayoutViewModel"
              Title="BindableLayoutControlPage">
        <ContentPage.ToolbarItems>
               <ToolbarItem Text="Options"
                            Clicked="NavigateToOptionsPage_Clicked"
                            AutomationId="Options"/>
        </ContentPage.ToolbarItems>
-       <VerticalStackLayout Spacing="3">
+       <VerticalStackLayout Spacing="3"
+                     Padding="3">
               <Label Text="StackLayout with BindableLayout"
                      FontAttributes="Bold"
                      FontSize="16"
@@ -28,6 +30,7 @@
                      HorizontalOptions="Center"/>
               <FlexLayout x:Name="MainFlexBindableLayout"
                           Direction="Row"
+                          Wrap="Wrap"
                           BindableLayout.ItemsSource="{Binding ItemsSource}"
                           BindableLayout.ItemTemplate="{Binding ItemTemplate}"
                           BindableLayout.ItemTemplateSelector="{Binding ItemTemplateSelector}"
@@ -36,17 +39,20 @@
               </FlexLayout>
               <BoxView HeightRequest="40"/>
               <!--Add or Remove item based on Index-->
-              <Label Text="Enter Item Index:"
-                     FontAttributes="Bold"
-                     FontSize="11"
-                     Grid.Row="1"
-                     Grid.Column="0"/>
-              <local:UITestEntry  x:Name="IndexEntry"
-                                  Placeholder="Enter item index"
-                                  Grid.Row="1"
-                                  Grid.Column="1"
-                                  AutomationId="IndexEntry"
-                                  IsCursorVisible="false"/>
+              <HorizontalStackLayout Spacing="5">
+                     <Label Text="Enter Item Index:"
+                            FontAttributes="Bold"
+                            FontSize="11"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalTextAlignment="Center"/>
+                     <local:UITestEntry  x:Name="IndexEntry"
+                                         Placeholder="Enter item index"
+                                         Grid.Row="1"
+                                         Grid.Column="1"
+                                         AutomationId="IndexEntry"
+                                         IsCursorVisible="false"/>
+              </HorizontalStackLayout>
               <!--Add or Remove Buttons -->
               <Button Text="Add Item"
                       Clicked="AddItems_Clicked"

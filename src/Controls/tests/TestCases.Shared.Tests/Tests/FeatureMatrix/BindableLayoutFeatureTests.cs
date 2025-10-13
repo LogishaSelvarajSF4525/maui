@@ -7,7 +7,7 @@ namespace Microsoft.Maui.TestCases.Tests;
 [Category(UITestCategories.Layout)]
 public class BindableLayoutFeatureTests : UITest
 {
-	public const string BindableLayoutFeatureMatrix = "Bindable Layout Feature Matrix";
+	public const string BindableLayoutFeatureMatrix = "BindableLayout Feature Matrix";
 
 	public BindableLayoutFeatureTests(TestDevice device)
 		: base(device)
@@ -59,7 +59,7 @@ public class BindableLayoutFeatureTests : UITest
 		App.WaitForElement("Apply");
 		App.Tap("Apply");
 		App.WaitForElement("StackLayoutWithBindableLayout");
-		App.WaitForElement("No Items Available(Null)");
+		App.WaitForElement("No Items Available(String)");
 	}
 
 	[Test]
@@ -82,10 +82,10 @@ public class BindableLayoutFeatureTests : UITest
 	{
 		App.WaitForElement("Options");
 		App.Tap("Options");
-		App.WaitForElement("EmptyViewGrid");
-		App.Tap("EmptyViewGrid");
 		App.WaitForElement("ItemsSourceEmptyCollection");
 		App.Tap("ItemsSourceEmptyCollection");
+		App.WaitForElement("EmptyViewGrid");
+		App.Tap("EmptyViewGrid");
 		App.WaitForElement("Apply");
 		App.Tap("Apply");
 		App.WaitForElement("StackLayoutWithBindableLayout");
@@ -157,16 +157,16 @@ public class BindableLayoutFeatureTests : UITest
 	{
 		App.WaitForElement("Options");
 		App.Tap("Options");
+		App.WaitForElement("ItemsSourceEmptyCollection");
+		App.Tap("ItemsSourceEmptyCollection");
 		App.WaitForElement("EmptyViewString");
 		App.Tap("EmptyViewString");
 		App.WaitForElement("EmptyViewTemplateGrid");
 		App.Tap("EmptyViewTemplateGrid");
-		App.WaitForElement("ItemsSourceEmptyCollection");
-		App.Tap("ItemsSourceEmptyCollection");
 		App.WaitForElement("Apply");
 		App.Tap("Apply");
 		App.WaitForElement("StackLayoutWithBindableLayout");
-		App.WaitForElement("No Items Available(Grid View)");
+		App.WaitForElement("No Template Items Available(Grid View)");
 	}
 
 	[Test]
@@ -183,7 +183,7 @@ public class BindableLayoutFeatureTests : UITest
 		App.WaitForElement("Apply");
 		App.Tap("Apply");
 		App.WaitForElement("StackLayoutWithBindableLayout");
-		//App.WaitForElement("No Template Items Available(Grid View)");
+		App.WaitForElement("No Template Items Available(Grid View)");
 	}
 
 	[Test]
@@ -282,7 +282,7 @@ public class BindableLayoutFeatureTests : UITest
 		App.WaitForNoElement("Monkey");
 		App.WaitForElement("IndexEntry");
 		App.ClearText("IndexEntry");
-		App.EnterText("IndexEntry", "0");
+		App.EnterText("IndexEntry", "2");
 		App.WaitForElement("ReplaceItems");
 		App.Tap("ReplaceItems");
 		App.WaitForNoElement("Carrot");
