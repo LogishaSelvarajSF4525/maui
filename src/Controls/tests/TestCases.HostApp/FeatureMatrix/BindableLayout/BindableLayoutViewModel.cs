@@ -8,14 +8,19 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Layouts;
 
 namespace Maui.Controls.Sample;
-
+public enum BindableItemsSourceType
+{
+	None,
+	ObservableCollectionT,
+	EmptyObservableCollectionT,
+}
 public class BindableLayoutViewModel : INotifyPropertyChanged
 {
 	private object _emptyView;
 	private DataTemplate _emptyViewTemplate;
 	private DataTemplate _itemTemplate;
 	private DataTemplateSelector _itemTemplateSelector;
-	private ItemsSourceType _itemsSourceType = ItemsSourceType.None;
+	private BindableItemsSourceType _itemsSourceType = BindableItemsSourceType.None;
 	private ObservableCollection<BindableLayoutTestItem> _observableCollection;
 	private ObservableCollection<BindableLayoutTestItem> _emptyObservableCollection;
 
@@ -91,7 +96,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		}
 	}
 
-	public ItemsSourceType ItemsSourceType
+	public BindableItemsSourceType ItemsSourceType
 	{
 		get => _itemsSourceType;
 		set
@@ -111,9 +116,9 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		{
 			return ItemsSourceType switch
 			{
-				ItemsSourceType.ObservableCollectionT => _observableCollection,
-				ItemsSourceType.EmptyObservableCollectionT => _emptyObservableCollection,
-				ItemsSourceType.None => null,
+				BindableItemsSourceType.ObservableCollectionT => _observableCollection,
+				BindableItemsSourceType.EmptyObservableCollectionT => _emptyObservableCollection,
+				BindableItemsSourceType.None => null,
 				_ => null
 			};
 		}
@@ -133,7 +138,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		var newItem = new BindableLayoutTestItem($"NewItem {_addIndex}", _addIndex);
 		_addIndex++;
 
-		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		if (ItemsSourceType == BindableItemsSourceType.ObservableCollectionT && _observableCollection != null)
 		{
 			_observableCollection.Insert(0, newItem);
 		}
@@ -149,7 +154,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		var fruitName = _addSequenceFruits[_addIndex++];
 		var newItem = new BindableLayoutTestItem(fruitName, _addIndex - 1);
 
-		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		if (ItemsSourceType == BindableItemsSourceType.ObservableCollectionT && _observableCollection != null)
 		{
 			_observableCollection.Insert(0, newItem);
 		}
@@ -160,7 +165,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 	public void RemoveLastItem()
 	{
 		object deletedItem = null;
-		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null && _observableCollection.Count > 0)
+		if (ItemsSourceType == BindableItemsSourceType.ObservableCollectionT && _observableCollection != null && _observableCollection.Count > 0)
 		{
 			deletedItem = _observableCollection[^1];
 			_observableCollection.RemoveAt(_observableCollection.Count - 1);
@@ -176,7 +181,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 
 		switch (ItemsSourceType)
 		{
-			case ItemsSourceType.ObservableCollectionT:
+			case BindableItemsSourceType.ObservableCollectionT:
 				if (index >= 0 && _observableCollection != null && index <= _observableCollection.Count)
 				{
 					_observableCollection.Insert(index, new BindableLayoutTestItem(sequentialItem, index));
@@ -190,7 +195,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 	public void RemoveItemAtIndex(int index)
 	{
 		object deletedItem = null;
-		if (ItemsSourceType == ItemsSourceType.ObservableCollectionT && _observableCollection != null)
+		if (ItemsSourceType == BindableItemsSourceType.ObservableCollectionT && _observableCollection != null)
 		{
 			if (index >= 0 && index < _observableCollection.Count)
 			{
@@ -205,7 +210,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 	private int _replaceIndex = 0;
 	public void ReplaceItem()
 	{
-		if (ItemsSourceType != ItemsSourceType.ObservableCollectionT ||
+		if (ItemsSourceType != BindableItemsSourceType.ObservableCollectionT ||
 			_observableCollection == null || _observableCollection.Count == 0)
 			return;
 
@@ -221,7 +226,7 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 
 	public void ReplaceItemAtIndex(int index)
 	{
-		if (ItemsSourceType != ItemsSourceType.ObservableCollectionT ||
+		if (ItemsSourceType != BindableItemsSourceType.ObservableCollectionT ||
 			_observableCollection == null || index < 0 || index >= _observableCollection.Count)
 			return;
 

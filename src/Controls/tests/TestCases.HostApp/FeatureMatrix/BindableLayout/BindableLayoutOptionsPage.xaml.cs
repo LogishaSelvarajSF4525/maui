@@ -29,7 +29,9 @@ public partial class BindableLayoutOptionsPage : ContentPage
 			}
 			else if (EmptyViewGrid.IsChecked)
 			{
-				var grid = new StackLayout
+				_viewModel.EmptyViewTemplate = null;
+				
+				Grid grid = new Grid
 				{
 					BackgroundColor = Colors.LightGray,
 					Padding = new Thickness(10),
@@ -42,7 +44,6 @@ public partial class BindableLayoutOptionsPage : ContentPage
 					TextColor = Colors.Blue
 				});
 				_viewModel.EmptyView = grid;
-				_viewModel.EmptyViewTemplate = null;
 			}
 		}
 
@@ -124,11 +125,11 @@ public partial class BindableLayoutOptionsPage : ContentPage
 			if (!(sender is RadioButton radioButton) || !e.Value)
 				return;
 			if (radioButton == ItemsSourceObservableCollection)
-				_viewModel.ItemsSourceType = ItemsSourceType.ObservableCollectionT;
+				_viewModel.ItemsSourceType = BindableItemsSourceType.ObservableCollectionT;
 			else if (radioButton == ItemsSourceEmptyCollection)
-				_viewModel.ItemsSourceType = ItemsSourceType.EmptyObservableCollectionT;
+				_viewModel.ItemsSourceType = BindableItemsSourceType.EmptyObservableCollectionT;
 			else if (radioButton == ItemsSourceNone)
-				_viewModel.ItemsSourceType = ItemsSourceType.None;
+				_viewModel.ItemsSourceType = BindableItemsSourceType.None;
 		}
         
 		private void OnItemTemplateSelectorChanged(object sender, CheckedChangedEventArgs e)
