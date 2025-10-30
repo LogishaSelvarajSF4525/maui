@@ -30,6 +30,8 @@ public partial class ScrollViewControlMainPage : ContentPage
 		BindingContext = _viewModel = new ScrollViewViewModel();
 		_viewModel.ScrollX = 0;
 		_viewModel.ScrollY = 0;
+		_viewModel.IsScrollToVisible = true;
+		_viewModel.IsButtonsVisible = false;
 		_viewModel.ContentSize = new Size(0, 0);
 		Dispatcher.Dispatch(async () =>
 		{
@@ -81,5 +83,17 @@ public partial class ScrollViewControlMainPage : ContentPage
 			if (vm.Content != null)
 				await MyScrollView.ScrollToAsync(vm.Content, position, true);
 		}
+	}
+
+	private void OnAddLabelClicked(object sender, EventArgs e)
+	{
+		if (BindingContext is ScrollViewViewModel vm)
+			vm.AddLabel();
+	}
+
+	private void OnRemoveLabelClicked(object sender, EventArgs e)
+	{
+		if (BindingContext is ScrollViewViewModel vm)
+			vm.RemoveLabel();
 	}
 }

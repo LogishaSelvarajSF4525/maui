@@ -28,16 +28,15 @@
                          SizeChanged="ScrollViewContent_SizeChanged"
                          AutomationId="ScrollViewContent"/>
         </ScrollView>
-        <HorizontalStackLayout Grid.Row="1"
-                               HorizontalOptions="Center">
+        <VerticalStackLayout x:Name="ScrollViewInfo" Grid.Row="1" IsVisible="{Binding IsScrollToVisible}">
+        <HorizontalStackLayout HorizontalOptions="Center">
             <Label Text="ContentSize: "
                    FontSize="14"/>
             <Label Text="{Binding ContentSizeString}"
                    FontSize="14"
                    AutomationId="ContentSizeLabel"/>
         </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Row="2"
-                               HorizontalOptions="Center">
+        <HorizontalStackLayout HorizontalOptions="Center">
             <Label Text="Scroll X: "
                    FontSize="14"/>
             <Label
@@ -45,8 +44,7 @@
                 FontSize="14"
                 AutomationId="ScrollXLabel"/>
         </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Row="3"
-                               HorizontalOptions="Center">
+        <HorizontalStackLayout HorizontalOptions="Center">
             <Label
                 Text="Scroll Y: "
                 FontSize="14"/>
@@ -55,8 +53,7 @@
                 FontSize="14"
                 AutomationId="ScrollYLabel"/>
         </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Row="4"
-                               HorizontalOptions="Center"
+        <HorizontalStackLayout HorizontalOptions="Center"
                 Spacing="2">
             <Label Text="Scroll To:"
                    FontSize="14"
@@ -77,6 +74,19 @@
                     Clicked="OnScrollToPositionButtonClicked"
                     AutomationId="ScrollToEndPosition"
                     WidthRequest="80"/>
+        </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <HorizontalStackLayout Spacing="10"
+                Grid.Row="2"
+                x:Name="DynamicButtons"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsButtonsVisible}">
+            <Button Text="Add Label"
+                    Clicked="OnAddLabelClicked"
+                    AutomationId="DynamicAddLabel"/>
+            <Button Text="Remove Label"
+                    Clicked="OnRemoveLabelClicked"
+                    AutomationId="DynamicRemoveLabel"/>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>

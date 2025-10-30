@@ -21,6 +21,11 @@ public class ScrollViewViewModel : INotifyPropertyChanged
 	public int ScrollYInt => (int)Math.Round(ScrollY);
 	private View _content;
 	private ScrollOrientation _orientation = ScrollOrientation.Vertical;
+	private bool _isScrollToVisible = true;
+	private bool _isButtonsVisible = false;
+	private int _labelCount = 3;
+	private Layout _dynamicStackLayout;
+
 
 	public ScrollViewViewModel()
 	{
@@ -142,8 +147,145 @@ public class ScrollViewViewModel : INotifyPropertyChanged
 		set { if (_orientation != value) { _orientation = value; OnPropertyChanged(); } }
 	}
 
+	public bool IsScrollToVisible
+	{
+		get => _isScrollToVisible;
+		set
+		{
+			if (_isScrollToVisible != value)
+			{
+				_isScrollToVisible = value;
+				OnPropertyChanged();
+			}
+		}
+	}
+
+	public bool IsButtonsVisible
+	{
+		get => _isButtonsVisible;
+		set
+		{
+			if (_isButtonsVisible != value)
+			{
+				_isButtonsVisible = value;
+				OnPropertyChanged();
+			}
+		}
+	}
+
+	public int LabelCount
+	{
+		get => _labelCount;
+		set
+		{
+			if (_labelCount != value)
+			{
+				_labelCount = value;
+				OnPropertyChanged();
+			}
+		}
+	}
+
+	public Layout DynamicStackLayout
+	{
+		get => _dynamicStackLayout;
+		set
+		{
+			if (_dynamicStackLayout != value)
+			{
+				_dynamicStackLayout = value;
+				OnPropertyChanged();
+			}
+		}
+	}
+
+	public Label CreateLabel(int number)
+	{
+		return new Label
+		{
+			Text = $"Label {number}",
+			FontSize = 18,
+			Padding = new Thickness(10),
+			AutomationId = $"DynamicLabel{number}"
+		};
+	}
+
+	public void AddLabel()
+	{
+		if (DynamicStackLayout == null)
+			return;
+		LabelCount++;
+		DynamicStackLayout.Children.Add(CreateLabel(LabelCount));
+		UpdateDynamicStackSize();
+		ForceRelayout();
+	}
+
+	public void RemoveLabel()
+	{
+		if (DynamicStackLayout == null)
+			return;
+		if (DynamicStackLayout.Children.Count == 0)
+			return;
+		DynamicStackLayout.Children.RemoveAt(DynamicStackLayout.Children.Count - 1);
+		LabelCount--;
+		UpdateDynamicStackSize();
+		ForceRelayout();
+	}
+
+	private void UpdateDynamicStackSize()
+	{
+		if (DynamicStackLayout == null)
+			return;
+		// Only fill width if parent is wider; never force height so blank space is avoided.
+		DynamicStackLayout.HorizontalOptions = LayoutOptions.Start;
+		if (DynamicStackLayout.Parent is VisualElement parent && parent.Width > 0 && parent.Width > DynamicStackLayout.Width)
+		{
+			DynamicStackLayout.HorizontalOptions = LayoutOptions.Fill;
+		}
+	}
+
+	private void ForceRelayout()
+	{
+		// Workaround: after removing children a ScrollView may keep old extent; force measure invalidation
+		DynamicStackLayout.InvalidateMeasure();
+		if (DynamicStackLayout?.Parent is VisualElement ve)
+		{
+			ve.InvalidateMeasure();
+		}
+		if (DynamicStackLayout?.Parent?.Parent is VisualElement grand)
+		{
+			grand.InvalidateMeasure();
+		}
+	}
+
 	public event PropertyChangedEventHandler PropertyChanged;
 
 	protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+	public class CustomScroll : ScrollView
+	{
+		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
+		{
+			return base.MeasureOverride(widthConstraint, heightConstraint);
+		}
+
+		protected override Size ArrangeOverride(Rect bounds)
+		{
+			return base.ArrangeOverride(bounds);
+		}
+	}
+
+	public class CustomStack : StackLayout
+	{
+		protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
+		{
+			return base.MeasureOverride(widthConstraint, heightConstraint);
+		}
+
+		protected override Size ArrangeOverride(Rect bounds)
+		{
+			return base.ArrangeOverride(bounds);
+		}
+	}
 }
