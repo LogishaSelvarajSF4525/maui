@@ -107,4 +107,18 @@ public partial class LayoutOptionsPage : ContentPage
 				break;
 		}
 	}
+
+	private void OnIsStackLayoutVisibleClicked(object sender, EventArgs e)
+	{
+		if (IsStackLayoutVisibleTrue.IsChecked)
+		{
+			_viewModel.IsStackLayoutVisible = true;
+			_viewModel.IsVisible = false;
+		}
+		else if (IsStackLayoutVisibleFalse.IsChecked)
+		{
+			_viewModel.IsStackLayoutVisible = false;
+			_viewModel.IsVisible = true;
+		}
+	}	
 }

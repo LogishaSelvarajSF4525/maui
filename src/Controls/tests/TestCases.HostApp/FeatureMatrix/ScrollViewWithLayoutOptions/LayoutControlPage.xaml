@@ -5,37 +5,63 @@
              x:Class="Maui.Controls.Sample.LayoutMainPage"
              x:DataType="local:LayoutViewModel"
              Title="LayoutPage">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Options"
-                     Clicked="NavigateToOptionsPage_Clicked"
-                     AutomationId="Options"/>
-    </ContentPage.ToolbarItems>
-    <Grid RowDefinitions="*,Auto"
-          ColumnDefinitions="*,*"
-          Padding="0,10"
-          RowSpacing="10"
-          ColumnSpacing="3">
+        <ContentPage.ToolbarItems>
+                <ToolbarItem Text="Options"
+                             Clicked="NavigateToOptionsPage_Clicked"
+                             AutomationId="Options"/>
+        </ContentPage.ToolbarItems>
+        <Grid RowDefinitions="*,Auto,Auto,Auto"
+              ColumnDefinitions="*,*"
+              Padding="0,10"
+              RowSpacing="10"
+              ColumnSpacing="3">
 
-        <ScrollView Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    x:Name="MyScrollView"
-                    HeightRequest="{Binding HeightRequest}"
-                    WidthRequest="{Binding WidthRequest}"
-                    Orientation="{Binding Orientation}"
-                    HorizontalScrollBarVisibility="Never"
-                    VerticalScrollBarVisibility="Never"
-                    BackgroundColor="Lavender"/>
-        <Button Text="StackLayout"
-                Grid.Row="1"
-                Grid.Column="0"
-                Clicked="OnScrollViewWithStackLayoutClicked"
-                AutomationId="StackLayoutButton"
-                WidthRequest="200"/>
-        <Button Text="Grid"
-                Grid.Row="1"
-                Grid.Column="1"
-                Clicked="OnGridWithChildrenClicked"
-                AutomationId="GridButton"
-                WidthRequest="200"/>
-    </Grid>
+                <ScrollView Grid.Row="0"
+                            Grid.ColumnSpan="2"
+                            x:Name="MyScrollView"
+                            IsVisible="{Binding IsVisible}"
+                            HeightRequest="{Binding HeightRequest}"
+                            WidthRequest="{Binding WidthRequest}"
+                            Orientation="{Binding Orientation}"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                            BackgroundColor="Lavender">
+                </ScrollView>
+                <local:CustomScroll x:Name="CustomLayoutControl"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    IsVisible="{Binding IsStackLayoutVisible}"
+                                    Orientation="{Binding Orientation}"
+                                    BackgroundColor="Lavender">
+                                    <local:CustomStack x:Name="LabelStack" Spacing="10"/>
+                </local:CustomScroll>
+                <Button Text="StackLayout"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        IsVisible="{Binding IsVisible}"
+                        Clicked="OnScrollViewWithStackLayoutClicked"
+                        AutomationId="StackLayoutButton"
+                        WidthRequest="200"/>
+                <Button Text="Grid"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        IsVisible="{Binding IsVisible}"
+                        Clicked="OnGridWithChildrenClicked"
+                        AutomationId="GridButton"
+                        WidthRequest="200"/>
+
+                <HorizontalStackLayout HorizontalOptions="Center"
+                                        Grid.Row="4"
+                                       IsVisible="{Binding IsStackLayoutVisible}">
+                        <Button Text="Add Child"
+                                Clicked="OnAddChildClicked"
+                                AutomationId="AddChildButton"
+                                WidthRequest="200"/>
+
+                        <Button Text="Remove Child"
+                                Clicked="OnRemoveChildClicked"
+                                AutomationId="RemoveChildButton"
+                                WidthRequest="200"/>
+                </HorizontalStackLayout>
+        </Grid>
 </ContentPage>

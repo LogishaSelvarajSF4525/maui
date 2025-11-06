@@ -11,6 +11,9 @@ public class LayoutViewModel : INotifyPropertyChanged
 	private double _widthRequest = -1;
 	private double _heightRequest = -1;
 	private ScrollOrientation _orientation = ScrollOrientation.Vertical;
+	private int _labelCount = 3;
+	private bool _isStackLayoutVisible = false;
+	private bool _isVisible = true;
 
 	public ScrollOrientation Orientation
 	{
@@ -73,6 +76,45 @@ public class LayoutViewModel : INotifyPropertyChanged
 			{
 				_heightRequest = value;
 				OnPropertyChanged(nameof(HeightRequest));
+			}
+		}
+	}
+
+	public int LabelCount
+	{
+		get => _labelCount;
+		set
+		{
+			if (_labelCount != value)
+			{
+				_labelCount = value;
+				OnPropertyChanged(nameof(LabelCount));
+			}
+		}
+	}
+
+	public bool IsStackLayoutVisible
+	{
+		get => _isStackLayoutVisible;
+		set
+		{
+			if (_isStackLayoutVisible != value)
+			{
+				_isStackLayoutVisible = value;
+				OnPropertyChanged(nameof(IsStackLayoutVisible));
+			}
+		}
+	}
+
+	public bool IsVisible
+	{
+		get => _isVisible;
+		set
+		{
+			if (_isVisible != value)
+			{
+				_isVisible = value;
+				OnPropertyChanged(nameof(IsVisible));
 			}
 		}
 	}
