@@ -212,35 +212,8 @@ public partial class ScrollViewOptionsPage : ContentPage
 				}
 				vm.Content = hStack;
 				break;
-			case "DynamicVertical":
-				SetupDynamicStack(vm, isHorizontal:false);
-				break;
-			case "DynamicHorizontal":
-				SetupDynamicStack(vm, isHorizontal:true);
-				break;
-				
-
 		}
 	}
-
-	private void SetupDynamicStack(ScrollViewViewModel vm, bool isHorizontal)
-	{
-		vm.IsScrollToVisible = false;
-		vm.IsButtonsVisible = true;
-		vm.LabelCount = Math.Max(vm.LabelCount, 3);
-		Layout stack;
-		if (isHorizontal)
-			stack = new ScrollViewViewModel.CustomStack { Orientation = StackOrientation.Horizontal, Spacing = 10, BackgroundColor = Colors.Beige };
-		else
-			stack = new ScrollViewViewModel.CustomStack { Orientation = StackOrientation.Vertical, Spacing = 10, BackgroundColor = Colors.Beige };
-		for (int i = 1; i <= vm.LabelCount; i++)
-		{
-			stack.Children.Add(vm.CreateLabel(i));
-		}
-		vm.DynamicStackLayout = stack;
-		vm.Content = stack;
-	}
-
 	private void IsVisibleRadio_CheckedChanged(object sender, CheckedChangedEventArgs e)
 	{
 		if (!(sender is RadioButton rb) || !rb.IsChecked)

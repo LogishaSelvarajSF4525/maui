@@ -43,14 +43,6 @@
                         AutomationId="ContentHorizontalStackLayout"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="10">
-                <Button Text="DynamicVertical"
-                        Clicked="OnContentTypeButtonClicked"
-                        AutomationId="ContentDynamicVertical"/>
-                <Button Text="DynamicHorizontal"
-                        Clicked="OnContentTypeButtonClicked"
-                        AutomationId="ContentDynamicHorizontal"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="10">
                 <Button Text="Editor"
                         Clicked="OnContentTypeButtonClicked"
                         WidthRequest="150"

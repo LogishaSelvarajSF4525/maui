@@ -17,7 +17,7 @@ public class LayoutControlPage : NavigationPage
 public partial class LayoutMainPage : ContentPage
 {
 	private LayoutViewModel _viewModel;
-	private Layout _currentLayout; // Tracks the current layout in ScrollView
+	private Layout _currentLayout;
 
 	public LayoutMainPage(LayoutViewModel viewModel)
 	{
@@ -30,6 +30,7 @@ public partial class LayoutMainPage : ContentPage
 	{
 		base.OnAppearing();
 		InitializeContent();
+
 		if (_viewModel.IsStackLayoutVisible && LabelStack != null)
 		{
 			DynamicLayoutClicked();
@@ -147,7 +148,8 @@ public partial class LayoutMainPage : ContentPage
 	{
 		_viewModel.IsStackLayoutVisible = true;
 		_viewModel.IsVisible = false;
-		if (LabelStack == null)
+
+		if (LabelStack != null)
 		{
 			if (_viewModel.Orientation == ScrollOrientation.Horizontal)
 			{
@@ -156,8 +158,7 @@ public partial class LayoutMainPage : ContentPage
 					Orientation = StackOrientation.Horizontal,
 					Spacing = 10,
 					Padding = new Thickness(10),
-					BackgroundColor = Colors.Pink,
-					HeightRequest = 200,
+					BackgroundColor = Colors.Pink
 				};
 
 				for (int i = 1; i <= _viewModel.LabelCount; i++)
@@ -181,16 +182,7 @@ public partial class LayoutMainPage : ContentPage
 				}
 			}
 		}
-		else
-		{
-			LabelStack.Children.Clear();
-			for (int i = 1; i <= _viewModel.LabelCount; i++)
-			{
-				LabelStack.Children.Add(CreateLabel(i));
-			}
-		}
 		CustomLayoutControl.Content = LabelStack;
-
 		_currentLayout = LabelStack;
 	}
 
@@ -217,6 +209,9 @@ public partial class LayoutMainPage : ContentPage
 
 	private void OnRemoveChildClicked(object sender, EventArgs e)
 	{
+		if (CustomLayoutControl.Content is Layout visibleLayout)
+			_currentLayout = visibleLayout;
+			
 		if (_currentLayout == null)
 			return;
 

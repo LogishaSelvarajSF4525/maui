@@ -51,6 +51,7 @@
 
                 <HorizontalStackLayout HorizontalOptions="Center"
                                         Grid.Row="4"
+                                        Spacing="5"
                                        IsVisible="{Binding IsStackLayoutVisible}">
                         <Button Text="Add Child"
                                 Clicked="OnAddChildClicked"
