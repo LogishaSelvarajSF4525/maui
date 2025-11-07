@@ -7,34 +7,6 @@ namespace Maui.Controls.Sample;
 
 public class CustomScroll : ScrollView
 {
-	public new static readonly BindableProperty OrientationProperty =
-		BindableProperty.Create(
-			nameof(Orientation),
-			typeof(ScrollOrientation),
-			typeof(CustomScroll),
-			ScrollOrientation.Vertical,
-			propertyChanged: OnOrientationChanged);
-	public new ScrollOrientation Orientation
-	{
-		get => (ScrollOrientation)GetValue(OrientationProperty);
-		set => SetValue(OrientationProperty, value);
-	}
-
-	static void OnOrientationChanged(BindableObject bindable, object oldValue, object newValue)
-	{
-		if (bindable is CustomScroll customScroll && newValue is ScrollOrientation newOrientation)
-		{
-			customScroll.SetOrientation(newOrientation);
-			customScroll.InvalidateMeasure(); // Ensure layout re-measures with new scroll direction
-			Debug.WriteLine($"[CustomScroll] Orientation changed {oldValue} -> {newOrientation}");
-		}
-	}
-
-	void SetOrientation(ScrollOrientation orientation)
-	{
-		base.Orientation = orientation;
-	}
-
 	protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
 	{
 		var size = base.MeasureOverride(widthConstraint, heightConstraint);

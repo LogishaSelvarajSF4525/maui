@@ -31,9 +31,8 @@
                                     Grid.Row="1"
                                     Grid.ColumnSpan="2"
                                     IsVisible="{Binding IsStackLayoutVisible}"
-                                    Orientation="{Binding Orientation}"
                                     BackgroundColor="Lavender">
-                                    <local:CustomStack x:Name="LabelStack" Spacing="10"/>
+                                    <local:CustomStack x:Name="LabelStack" Spacing="10" Orientation="{Binding Orientation}"/>
                 </local:CustomScroll>
                 <Button Text="StackLayout"
                         Grid.Row="2"

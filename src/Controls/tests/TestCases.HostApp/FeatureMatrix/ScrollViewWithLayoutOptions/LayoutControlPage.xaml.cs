@@ -149,33 +149,47 @@ public partial class LayoutMainPage : ContentPage
 		_viewModel.IsVisible = false;
 		if (LabelStack == null)
 		{
-			LabelStack = new CustomStack
+			if (_viewModel.Orientation == ScrollOrientation.Horizontal)
 			{
-				Orientation = _viewModel.Orientation == ScrollOrientation.Vertical
-					? StackOrientation.Vertical
-					: StackOrientation.Horizontal,
-				Spacing = 10,
-				Padding = new Thickness(10),
-				BackgroundColor = _viewModel.Orientation == ScrollOrientation.Horizontal
-					? Colors.Pink
-					: Colors.Yellow,
-				HeightRequest = _viewModel.Orientation == ScrollOrientation.Horizontal
-					? 200
-					: -1,
-				WidthRequest = _viewModel.Orientation == ScrollOrientation.Horizontal
-					? 150
-					: -1
-			};
+				LabelStack = new CustomStack
+				{
+					Orientation = StackOrientation.Horizontal,
+					Spacing = 10,
+					Padding = new Thickness(10),
+					BackgroundColor = Colors.Pink,
+					HeightRequest = 200,
+				};
 
-			CustomLayoutControl.Content = LabelStack;
+				for (int i = 1; i <= _viewModel.LabelCount; i++)
+				{
+					LabelStack.Children.Add(CreateLabel(i));
+				}
+			}
+			else
+			{
+				LabelStack = new CustomStack
+				{
+					Orientation = StackOrientation.Vertical,
+					Spacing = 10,
+					Padding = new Thickness(10),
+					BackgroundColor = Colors.Yellow,
+				};
+
+				for (int i = 1; i <= _viewModel.LabelCount; i++)
+				{
+					LabelStack.Children.Add(CreateLabel(i));
+				}
+			}
 		}
-
-		LabelStack.Children.Clear();
-
-		for (int i = 1; i <= _viewModel.LabelCount; i++)
+		else
 		{
-			LabelStack.Children.Add(CreateLabel(i));
+			LabelStack.Children.Clear();
+			for (int i = 1; i <= _viewModel.LabelCount; i++)
+			{
+				LabelStack.Children.Add(CreateLabel(i));
+			}
 		}
+		CustomLayoutControl.Content = LabelStack;
 
 		_currentLayout = LabelStack;
 	}
@@ -189,8 +203,6 @@ public partial class LayoutMainPage : ContentPage
 			Padding = new Thickness(10)
 		};
 	}
-
-
 	private void OnAddChildClicked(object sender, EventArgs e)
 	{
 		if (CustomLayoutControl.Content is Layout visibleLayout)
@@ -211,6 +223,7 @@ public partial class LayoutMainPage : ContentPage
 		if (_currentLayout.Children.Count > 0)
 		{
 			_currentLayout.Children.RemoveAt(_currentLayout.Children.Count - 1);
+			_viewModel.LabelCount--;
 		}
 	}
 }
