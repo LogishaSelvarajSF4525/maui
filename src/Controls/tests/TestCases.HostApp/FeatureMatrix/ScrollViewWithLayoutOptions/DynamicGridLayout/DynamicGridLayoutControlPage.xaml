@@ -1,0 +1,27 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maui.Controls.Sample"
+             x:Class="Maui.Controls.Sample.DynamicGridLayoutControlPage"
+             x:DataType="local:LayoutViewModel"
+             Title="Dynamic Grid Layout">
+
+    <VerticalStackLayout Padding="10"
+            Spacing="10">
+        <ScrollView>
+            <Grid x:Name="DynamicGrid"
+                  BackgroundColor="LightGray"
+                  Padding="10"
+                  RowSpacing="10"
+                  ColumnSpacing="10"/>
+            
+        </ScrollView>
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Add Child"
+                    Clicked="OnAddChildClicked"
+                    AutomationId="AddChildButton"/>
+            <Button Text="Remove Child"
+                    Clicked="OnRemoveChildClicked"
+                    AutomationId="RemoveChildButton"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

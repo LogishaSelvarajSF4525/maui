@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Maui.Controls.Sample"
+             x:Class="Maui.Controls.Sample.DynamicStackLayoutControlPage"
+             x:DataType="local:LayoutViewModel"
+             Title="DynamicStackLayoutControlPage">
+    <VerticalStackLayout Padding="10"
+                         Spacing="10">
+        <ScrollView x:Name="MyScrollView"
+                    BackgroundColor="Lavender">
+            <StackLayout x:Name="DynamicStack"
+                         Spacing="5"
+                         Padding="10"
+                         Orientation="{Binding Orientation}">
+            </StackLayout>
+        </ScrollView>
+        <Label x:Name="OrientationLabel"
+            Text="Orientation:"
+               FontAttributes="Bold"/>
+        <HorizontalStackLayout x:Name="OrientationButtons"
+             Spacing="10">
+            <Button Text="Horizontal"
+                    Clicked="OnOrientationClicked"
+                    AutomationId="HorizontalButton"/>
+            <Button Text="Vertical"
+                    Clicked="OnOrientationClicked"
+                    AutomationId="VerticalButton"/>
+        </HorizontalStackLayout>
+        <StackLayout Orientation="Horizontal"
+                     Spacing="10"
+                     HorizontalOptions="Center">
+            <Button Text="Add Child"
+                    Clicked="OnAddChildClicked"
+                    BackgroundColor="LightGreen"
+                    AutomationId="AddButton"/>
+            <Button Text="Remove Child"
+                    Clicked="OnRemoveChildClicked"
+                    BackgroundColor="LightCoral"
+                    AutomationId="RemoveButton"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

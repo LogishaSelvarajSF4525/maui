@@ -17,7 +17,6 @@ public class LayoutControlPage : NavigationPage
 public partial class LayoutMainPage : ContentPage
 {
 	private LayoutViewModel _viewModel;
-	private Layout _currentLayout;
 
 	public LayoutMainPage(LayoutViewModel viewModel)
 	{
@@ -30,11 +29,6 @@ public partial class LayoutMainPage : ContentPage
 	{
 		base.OnAppearing();
 		InitializeContent();
-
-		if (_viewModel.IsStackLayoutVisible && LabelStack != null)
-		{
-			DynamicLayoutClicked();
-		}
 	}
 
 	private void InitializeContent()
@@ -49,14 +43,11 @@ public partial class LayoutMainPage : ContentPage
 		};
 
 		MyScrollView.Content = defaultLayout;
-		_currentLayout = defaultLayout;
 	}
 
 	private async void NavigateToOptionsPage_Clicked(object sender, EventArgs e)
 	{
 		BindingContext = _viewModel = new LayoutViewModel();
-		_viewModel.IsStackLayoutVisible = false;
-		_viewModel.IsVisible = true;
 		await Navigation.PushAsync(new LayoutOptionsPage(_viewModel));
 	}
 
@@ -73,11 +64,11 @@ public partial class LayoutMainPage : ContentPage
 				BackgroundColor = Colors.LightGray,
 				Spacing = 10,
 				Children =
-				{
-					new Label { Text = "StackLayout", VerticalOptions = LayoutOptions.Center  },
-					new Button { Text = "Button1", VerticalOptions = LayoutOptions.Center },
-					new Button { Text = "Button2", VerticalOptions = LayoutOptions.Center }
-				}
+			{
+				new Label { Text = "StackLayout", VerticalOptions = LayoutOptions.Center  },
+				new Button { Text = "Button1", VerticalOptions = LayoutOptions.Center },
+				new Button { Text = "Button2", VerticalOptions = LayoutOptions.Center }
+			}
 			};
 		}
 		else
@@ -89,25 +80,16 @@ public partial class LayoutMainPage : ContentPage
 				BackgroundColor = Colors.LightGray,
 				Spacing = 10,
 				Children =
-				{
-					new Label { Text = "StackLayout", HorizontalOptions = LayoutOptions.Center },
-					new Button { Text = "Button1", HorizontalOptions = LayoutOptions.Center  },
-					new Button { Text = "Button2", HorizontalOptions = LayoutOptions.Center }
-				}
+			{
+				new Label { Text = "StackLayout", HorizontalOptions = LayoutOptions.Center },
+				new Button { Text = "Button1", HorizontalOptions = LayoutOptions.Center  },
+				new Button { Text = "Button2", HorizontalOptions = LayoutOptions.Center }
+			}
 			};
 		}
 
-		// Add initial content
-		layout.Children.Add(new Label
-		{
-			Text = "Dynamic StackLayout Content",
-			HorizontalOptions = LayoutOptions.Center,
-			VerticalOptions = LayoutOptions.Center
-		});
-
 		MyScrollView.Content = layout;
 	}
-
 
 	private void OnGridWithChildrenClicked(object sender, EventArgs e)
 	{
@@ -141,84 +123,5 @@ public partial class LayoutMainPage : ContentPage
 		grid.Add(button5, 1, 1);
 		grid.Add(button6, 2, 1);
 		MyScrollView.Content = grid;
-
-		MyScrollView.Content = _currentLayout = grid;
-	}
-	private void DynamicLayoutClicked()
-	{
-		_viewModel.IsStackLayoutVisible = true;
-		_viewModel.IsVisible = false;
-
-		if (LabelStack != null)
-		{
-			if (_viewModel.Orientation == ScrollOrientation.Horizontal)
-			{
-				LabelStack = new CustomStack
-				{
-					Orientation = StackOrientation.Horizontal,
-					Spacing = 10,
-					Padding = new Thickness(10),
-					BackgroundColor = Colors.Pink
-				};
-
-				for (int i = 1; i <= _viewModel.LabelCount; i++)
-				{
-					LabelStack.Children.Add(CreateLabel(i));
-				}
-			}
-			else
-			{
-				LabelStack = new CustomStack
-				{
-					Orientation = StackOrientation.Vertical,
-					Spacing = 10,
-					Padding = new Thickness(10),
-					BackgroundColor = Colors.Yellow,
-				};
-
-				for (int i = 1; i <= _viewModel.LabelCount; i++)
-				{
-					LabelStack.Children.Add(CreateLabel(i));
-				}
-			}
-		}
-		CustomLayoutControl.Content = LabelStack;
-		_currentLayout = LabelStack;
-	}
-
-	private Label CreateLabel(int index)
-	{
-		return new Label
-		{
-			Text = $"Label {index}",
-			FontSize = 18,
-			Padding = new Thickness(10)
-		};
-	}
-	private void OnAddChildClicked(object sender, EventArgs e)
-	{
-		if (CustomLayoutControl.Content is Layout visibleLayout)
-			_currentLayout = visibleLayout;
-
-		if (_currentLayout == null)
-			return;
-
-		_viewModel.LabelCount++;
-		_currentLayout.Children.Add(CreateLabel(_viewModel.LabelCount));
-	}
-
-	private void OnRemoveChildClicked(object sender, EventArgs e)
-	{
-		if (CustomLayoutControl.Content is Layout visibleLayout)
-			_currentLayout = visibleLayout;
-			
-		if (_currentLayout == null)
-			return;
-
-		if (_currentLayout.Children.Count > 0)
-		{
-			_currentLayout.Children.RemoveAt(_currentLayout.Children.Count - 1);
-			_viewModel.LabelCount--;
-		}
 	}
 }
