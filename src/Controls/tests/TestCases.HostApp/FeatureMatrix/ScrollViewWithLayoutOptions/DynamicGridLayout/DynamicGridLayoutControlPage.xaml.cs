@@ -67,14 +67,14 @@ public partial class DynamicGridLayoutControlPage : ContentPage
 
 	private void OnAddChildClicked(object sender, EventArgs e)
 	{
-		if (DynamicGrid == null)
+		if (_currentGrid == null)
 			return;
 
 		_viewModel.LabelCount++;
 
-		if (DynamicGrid.RowDefinitions.Count == 0)
+		if (_currentGrid.RowDefinitions.Count == 0)
 			DynamicGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-		if (DynamicGrid.ColumnDefinitions.Count == 0)
+		if (_currentGrid.ColumnDefinitions.Count == 0)
 			DynamicGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
 		int columns = DynamicGrid.ColumnDefinitions.Count;

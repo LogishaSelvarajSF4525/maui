@@ -70,15 +70,15 @@ public partial class DynamicStackLayoutControlPage : ContentPage
 		}
 	}
 
-	private void OnOrientationClicked(object sender, EventArgs e)
+	private void OnOrientationClicked(object sender, CheckedChangedEventArgs e)
 	{
-		if (_viewModel.Orientation == ScrollOrientation.Vertical)
+		if (VerticalStack.IsChecked)
 		{
-			_viewModel.Orientation = ScrollOrientation.Horizontal;
+			_viewModel.Orientation = ScrollOrientation.Vertical;
 		}
 		else
 		{
-			_viewModel.Orientation = ScrollOrientation.Vertical;
+			_viewModel.Orientation = ScrollOrientation.Horizontal;
 		}
 
 		BuildDynamicStack();

@@ -4,10 +4,11 @@
              x:Class="Maui.Controls.Sample.DynamicGridLayoutControlPage"
              x:DataType="local:LayoutViewModel"
              Title="Dynamic Grid Layout">
-
     <VerticalStackLayout Padding="10"
             Spacing="10">
-        <ScrollView>
+        <ScrollView x:Name="MyScrollView"
+                    BackgroundColor="Lavender"
+                    AutomationId="ScrollViewWithDynamicGridLayout">
             <Grid x:Name="DynamicGrid"
                   BackgroundColor="LightGray"
                   Padding="10"
@@ -18,10 +19,10 @@
         <HorizontalStackLayout Spacing="10">
             <Button Text="Add Child"
                     Clicked="OnAddChildClicked"
-                    AutomationId="AddChildButton"/>
+                    AutomationId="AddButton"/>
             <Button Text="Remove Child"
                     Clicked="OnRemoveChildClicked"
-                    AutomationId="RemoveChildButton"/>
+                    AutomationId="RemoveButton"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

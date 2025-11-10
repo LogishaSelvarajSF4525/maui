@@ -8,7 +8,8 @@
     <VerticalStackLayout Padding="10"
                          Spacing="10">
         <ScrollView x:Name="MyScrollView"
-                    BackgroundColor="Lavender">
+                    BackgroundColor="Lavender"
+                    AutomationId="ScrollViewWithDynamicStackLayout">
             <StackLayout x:Name="DynamicStack"
                          Spacing="5"
                          Padding="10"
@@ -16,27 +17,29 @@
             </StackLayout>
         </ScrollView>
         <Label x:Name="OrientationLabel"
-            Text="Orientation:"
+               Text="Orientation:"
                FontAttributes="Bold"/>
         <HorizontalStackLayout x:Name="OrientationButtons"
-             Spacing="10">
-            <Button Text="Horizontal"
-                    Clicked="OnOrientationClicked"
-                    AutomationId="HorizontalButton"/>
-            <Button Text="Vertical"
-                    Clicked="OnOrientationClicked"
-                    AutomationId="VerticalButton"/>
+                               Spacing="10">
+            <RadioButton x:Name="VerticalStack"
+                         Content="Vertical"
+                         IsChecked="True"
+                         CheckedChanged="OnOrientationClicked"
+                         AutomationId="VerticalButton"/>
+            <RadioButton x:Name="HorizontalStack"
+                         Content="Horizontal"
+                         CheckedChanged="OnOrientationClicked"
+                         AutomationId="HorizontalButton"/>
+
         </HorizontalStackLayout>
         <StackLayout Orientation="Horizontal"
                      Spacing="10"
                      HorizontalOptions="Center">
             <Button Text="Add Child"
                     Clicked="OnAddChildClicked"
-                    BackgroundColor="LightGreen"
                     AutomationId="AddButton"/>
             <Button Text="Remove Child"
                     Clicked="OnRemoveChildClicked"
-                    BackgroundColor="LightCoral"
                     AutomationId="RemoveButton"/>
         </StackLayout>
     </VerticalStackLayout>

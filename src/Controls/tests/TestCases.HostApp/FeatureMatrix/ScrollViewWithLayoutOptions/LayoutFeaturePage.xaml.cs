@@ -32,8 +32,4 @@ public partial class LayoutFeatureMainPage : ContentPage
 	{
 		await Navigation.PushAsync(new DynamicGridLayoutControlPage());
 	}
-	private async void OnDynamicLayoutButtonClicked(object sender, EventArgs e)
-	{
-		await Navigation.PushAsync(new DynamicLayoutControlPage());
-	}
 }
