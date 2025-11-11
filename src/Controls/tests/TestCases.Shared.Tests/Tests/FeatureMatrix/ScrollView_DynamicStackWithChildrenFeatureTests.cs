@@ -68,6 +68,7 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		App.WaitForNoElement("Label 4");
 	}
 
+#if TEST_FAILS_ON_CATALYST && TEST_FAILS_ON_IOS //related issue link:https://github.com/dotnet/maui/issues/32221
 	[Test, Order(5)]
 	public void VerifyVerticalStackLayoutResizesCorrectly_AfterAddingAndRemovingChildren()
 	{
@@ -111,4 +112,5 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		}
 		VerifyScreenshot();
 	}
+#endif
 }
