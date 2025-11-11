@@ -3,14 +3,11 @@ namespace Maui.Controls.Sample;
 public partial class DynamicStackLayoutControlPage : ContentPage
 {
 	private LayoutViewModel _viewModel;
-	private Layout _currentLayout;
 	public DynamicStackLayoutControlPage()
 	{
 		InitializeComponent();
 		_viewModel = new LayoutViewModel();
 		BindingContext = _viewModel;
-
-		_currentLayout = DynamicStack;
 	}
 
 	protected override void OnAppearing()
@@ -52,20 +49,20 @@ public partial class DynamicStackLayoutControlPage : ContentPage
 	}
 	private void OnAddChildClicked(object sender, EventArgs e)
 	{
-		if (_currentLayout == null)
+		if (DynamicStack == null)
 			return;
 		_viewModel.LabelCount++;
-		_currentLayout.Children.Add(CreateLabel(_viewModel.LabelCount));
+		DynamicStack.Children.Add(CreateLabel(_viewModel.LabelCount));
 	}
 
 	private void OnRemoveChildClicked(object sender, EventArgs e)
 	{
-		if (_currentLayout == null)
+		if (DynamicStack == null)
 			return;
 
-		if (_currentLayout.Children.Count > 0)
+		if (DynamicStack.Children.Count > 0)
 		{
-			_currentLayout.Children.RemoveAt(_currentLayout.Children.Count - 1);
+			DynamicStack.Children.RemoveAt(DynamicStack.Children.Count - 1);
 			_viewModel.LabelCount--;
 		}
 	}

@@ -22,5 +22,10 @@
                 HorizontalOptions="Center"
                 AutomationId="DynamicGridLayoutButton"
                 WidthRequest="400"/> 
+        <Button Text="ScrollView With DynamicFlexLayout"
+                Clicked="OnDynamicFlexLayoutButtonClicked"
+                HorizontalOptions="Center"
+                AutomationId="DynamicFlexLayoutButton"
+                WidthRequest="400"/>
     </VerticalStackLayout>
 </ContentPage>

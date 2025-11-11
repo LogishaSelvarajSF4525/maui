@@ -7,11 +7,11 @@ namespace Microsoft.Maui.TestCases.Tests;
 
 [Category(UITestCategories.ScrollView)]
 
-public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
+public class ScrollView_DynamicFlexWithChildrenFeatureTests : UITest
 {
 
 	public const string ScrollViewWithLayoutOptionsFeatureMatrix = "ScrollView With LayoutOptions Feature Matrix";
-	public ScrollView_DynamicGridWithChildrenFeatureTests(TestDevice device)
+	public ScrollView_DynamicFlexWithChildrenFeatureTests(TestDevice device)
 		: base(device)
 	{
 	}
@@ -23,11 +23,11 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 	}
 
 	[Test, Order(1)]
-	public void VerifyGridWithAddChildren_RowWise()
+	public void VerifyFlexWithAddChildren_RowDirection()
 	{
-		App.WaitForElement("DynamicGridLayoutButton");
-		App.Tap("DynamicGridLayoutButton");
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("DynamicFlexLayoutButton");
+		App.Tap("DynamicFlexLayoutButton");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("RowButton");
 		App.Tap("RowButton");
 		App.WaitForElement("AddButton");
@@ -36,9 +36,9 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 	}
 
 	[Test, Order(2)]
-	public void VerifyGridWithRemoveChildren_RowWise()
+	public void VerifyFlexWithRemoveChildren_RowDirection()
 	{
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("RowButton");
 		App.Tap("RowButton");
 		App.WaitForElement("RemoveButton");
@@ -47,9 +47,9 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 	}
 
 	[Test, Order(3)]
-	public void VerifyGridWithAddChildren_ColumnWise()
+	public void VerifyFlexWithAddChildren_ColumnDirection()
 	{
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("ColumnButton");
 		App.Tap("ColumnButton");
 		App.WaitForElement("AddButton");
@@ -58,9 +58,9 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 	}
 
 	[Test, Order(4)]
-	public void VerifyGridWithRemoveChildren_ColumnWise()
+	public void VerifyFlexWithRemoveChildren_ColumnDirection()
 	{
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("ColumnButton");
 		App.Tap("ColumnButton");
 		App.WaitForElement("RemoveButton");
@@ -70,21 +70,21 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 
 #if TEST_FAILS_ON_CATALYST && TEST_FAILS_ON_IOS //related issue link:https://github.com/dotnet/maui/issues/32221
 	[Test, Order(5)]
-	public void VerifyGridWithResizesCorrectly_AfterAddingAndRemovingChildrenWithRowWise()
+	public void VerifyFlexWithResizesCorrectly_AfterAddingAndRemovingWithRowDirection()
 	{
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("RowButton");
 		App.Tap("RowButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			App.Tap("RemoveButton");
 		}
@@ -93,21 +93,21 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 #endif
 
 	[Test, Order(6)]
-	public void VerifyGridWithResizesCorrectly_AfterAddingAndRemovingChildrenWithColumnWise()
+	public void VerifyFlexWithResizesCorrectly_AfterAddingAndRemovingWithColumnDirection()
 	{
-		App.WaitForElement("ScrollViewWithDynamicGridLayout");
+		App.WaitForElement("ScrollViewWithDynamicFlexLayout");
 		App.WaitForElement("ColumnButton");
 		App.Tap("ColumnButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			App.Tap("RemoveButton");
 		}

@@ -90,6 +90,7 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		}
 		VerifyScreenshot();
 	}
+#endif
 
 	[Test, Order(6)]
 	public void VerifyHorizontalStackLayoutResizesCorrectly_AfterAddingAndRemovingChildren()
@@ -112,5 +113,4 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		}
 		VerifyScreenshot();
 	}
-#endif
 }
