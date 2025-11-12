@@ -81,5 +81,4 @@
   <ItemGroup>
     <MauiXaml Update="**\*.xaml" Inflator="SourceGen"  NoWarn="0612"/>
   </ItemGroup>
-  
 </Project>
