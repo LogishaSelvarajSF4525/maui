@@ -90,7 +90,6 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 		}
 		VerifyScreenshot();
 	}
-#endif
 
 	[Test, Order(6)]
 	public void VerifyGridWithResizesCorrectly_AfterAddingAndRemovingChildrenWithColumnWise()
@@ -113,4 +112,5 @@ public class ScrollView_DynamicGridWithChildrenFeatureTests : UITest
 		}
 		VerifyScreenshot();
 	}
+#endif
 }

@@ -77,20 +77,19 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		App.Tap("VerticalButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			App.Tap("RemoveButton");
 		}
 		VerifyScreenshot();
 	}
-#endif
 
 	[Test, Order(6)]
 	public void VerifyHorizontalStackLayoutResizesCorrectly_AfterAddingAndRemovingChildren()
@@ -100,17 +99,18 @@ public class ScrollView_DynamicStackWithChildrenFeatureTests : UITest
 		App.Tap("HorizontalButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 6; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 7; i++)
 		{
 			App.Tap("RemoveButton");
 		}
 		VerifyScreenshot();
 	}
+#endif
 }

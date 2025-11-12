@@ -31,6 +31,8 @@ public partial class DynamicFlexLayoutControlPage : ContentPage
 			DynamicFlex.BackgroundColor = Colors.Pink;
 			DynamicFlex.HorizontalOptions = LayoutOptions.Fill;
 			DynamicFlex.VerticalOptions = LayoutOptions.Start;
+			MyScrollView.HorizontalOptions = LayoutOptions.Fill;
+			MyScrollView.VerticalOptions = LayoutOptions.Start;
 			MyScrollView.Orientation = ScrollOrientation.Vertical;
 		}
 		else
@@ -39,6 +41,8 @@ public partial class DynamicFlexLayoutControlPage : ContentPage
 			DynamicFlex.BackgroundColor = Colors.Yellow;
 			DynamicFlex.HorizontalOptions = LayoutOptions.Start;
 			DynamicFlex.VerticalOptions = LayoutOptions.Fill;
+			MyScrollView.HorizontalOptions = LayoutOptions.Start;
+			MyScrollView.VerticalOptions = LayoutOptions.Fill;
 			MyScrollView.Orientation = ScrollOrientation.Horizontal;
 		}
 

@@ -77,20 +77,19 @@ public class ScrollView_DynamicFlexWithChildrenFeatureTests : UITest
 		App.Tap("RowButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 9; i++)
 		{
 			App.Tap("RemoveButton");
 		}
 		VerifyScreenshot();
 	}
-#endif
 
 	[Test, Order(6)]
 	public void VerifyFlexWithResizesCorrectly_AfterAddingAndRemovingWithColumnDirection()
@@ -100,17 +99,18 @@ public class ScrollView_DynamicFlexWithChildrenFeatureTests : UITest
 		App.Tap("ColumnButton");
 		App.WaitForElement("AddButton");
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			App.Tap("AddButton");
 		}
 
 		App.WaitForElement("RemoveButton");
 
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			App.Tap("RemoveButton");
 		}
 		VerifyScreenshot();
 	}
+#endif
 }

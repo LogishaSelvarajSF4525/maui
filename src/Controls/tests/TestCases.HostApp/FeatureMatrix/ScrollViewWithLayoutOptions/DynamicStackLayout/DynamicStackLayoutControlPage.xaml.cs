@@ -26,6 +26,8 @@ public partial class DynamicStackLayoutControlPage : ContentPage
 			DynamicStack.BackgroundColor = Colors.Pink;
 			DynamicStack.HorizontalOptions = LayoutOptions.Start;
 			DynamicStack.VerticalOptions = LayoutOptions.Fill;
+			MyScrollView.HorizontalOptions = LayoutOptions.Start;
+			MyScrollView.VerticalOptions = LayoutOptions.Fill;
 		}
 		else
 		{
@@ -33,6 +35,8 @@ public partial class DynamicStackLayoutControlPage : ContentPage
 			DynamicStack.BackgroundColor = Colors.Yellow;
 			DynamicStack.HorizontalOptions = LayoutOptions.Fill;
 			DynamicStack.VerticalOptions = LayoutOptions.Start;
+			MyScrollView.HorizontalOptions = LayoutOptions.Fill;
+			MyScrollView.VerticalOptions = LayoutOptions.Start;
 		}
 
 		for (int i = 1; i <= _viewModel.LabelCount; i++)
