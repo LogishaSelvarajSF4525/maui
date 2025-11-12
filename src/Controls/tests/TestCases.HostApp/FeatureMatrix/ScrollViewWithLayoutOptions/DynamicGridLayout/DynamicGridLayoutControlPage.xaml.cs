@@ -47,6 +47,9 @@ public partial class DynamicGridLayoutControlPage : ContentPage
 				DynamicGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
 			DynamicGrid.BackgroundColor = Colors.Pink;
+			DynamicGrid.HorizontalOptions = LayoutOptions.Fill;
+			DynamicGrid.VerticalOptions = LayoutOptions.Start;
+			MyScrollView.Orientation = ScrollOrientation.Vertical;
 		}
 		else
 		{
@@ -57,6 +60,9 @@ public partial class DynamicGridLayoutControlPage : ContentPage
 				DynamicGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
 			DynamicGrid.BackgroundColor = Colors.Yellow;
+			DynamicGrid.HorizontalOptions = LayoutOptions.Start;
+			DynamicGrid.VerticalOptions = LayoutOptions.Fill;
+			MyScrollView.Orientation = ScrollOrientation.Horizontal;
 		}
 	}
 

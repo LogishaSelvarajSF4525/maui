@@ -29,11 +29,17 @@ public partial class DynamicFlexLayoutControlPage : ContentPage
 		{
 			DynamicFlex.Direction = FlexDirection.Row;
 			DynamicFlex.BackgroundColor = Colors.Pink;
+			DynamicFlex.HorizontalOptions = LayoutOptions.Fill;
+			DynamicFlex.VerticalOptions = LayoutOptions.Start;
+			MyScrollView.Orientation = ScrollOrientation.Vertical;
 		}
 		else
 		{
 			DynamicFlex.Direction = FlexDirection.Column;
 			DynamicFlex.BackgroundColor = Colors.Yellow;
+			DynamicFlex.HorizontalOptions = LayoutOptions.Start;
+			DynamicFlex.VerticalOptions = LayoutOptions.Fill;
+			MyScrollView.Orientation = ScrollOrientation.Horizontal;
 		}
 
 		for (int i = 1; i <= _viewModel.LabelCount; i++)

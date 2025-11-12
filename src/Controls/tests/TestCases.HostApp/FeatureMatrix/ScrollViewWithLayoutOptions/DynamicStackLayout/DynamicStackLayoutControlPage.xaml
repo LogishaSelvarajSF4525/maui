@@ -8,6 +8,7 @@
     <VerticalStackLayout Padding="10"
                          Spacing="10">
         <ScrollView x:Name="MyScrollView"
+                    Orientation="{Binding Orientation}"
                     BackgroundColor="Lavender"
                     AutomationId="ScrollViewWithDynamicStackLayout">
             <StackLayout x:Name="DynamicStack"

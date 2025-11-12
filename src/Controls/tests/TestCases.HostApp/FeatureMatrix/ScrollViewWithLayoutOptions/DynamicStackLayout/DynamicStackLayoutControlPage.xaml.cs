@@ -24,11 +24,15 @@ public partial class DynamicStackLayoutControlPage : ContentPage
 		{
 			DynamicStack.Orientation = StackOrientation.Horizontal;
 			DynamicStack.BackgroundColor = Colors.Pink;
+			DynamicStack.HorizontalOptions = LayoutOptions.Start;
+			DynamicStack.VerticalOptions = LayoutOptions.Fill;
 		}
 		else
 		{
 			DynamicStack.Orientation = StackOrientation.Vertical;
 			DynamicStack.BackgroundColor = Colors.Yellow;
+			DynamicStack.HorizontalOptions = LayoutOptions.Fill;
+			DynamicStack.VerticalOptions = LayoutOptions.Start;
 		}
 
 		for (int i = 1; i <= _viewModel.LabelCount; i++)
