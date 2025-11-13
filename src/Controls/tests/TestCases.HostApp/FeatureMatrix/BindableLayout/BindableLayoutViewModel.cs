@@ -16,7 +16,9 @@ public enum BindableItemsSourceType
 }
 public class BindableLayoutViewModel : INotifyPropertyChanged
 {
-	private object _emptyView;
+	private object _stackEmptyView;
+	private object _flexEmptyView;
+	private object _emptyView; // Generic empty view used by options page
 	private DataTemplate _emptyViewTemplate;
 	private DataTemplate _itemTemplate;
 	private DataTemplateSelector _itemTemplateSelector;
@@ -60,10 +62,29 @@ public class BindableLayoutViewModel : INotifyPropertyChanged
 		AddItemCommand = new Command(AddItem);
 	}
 
+	public object StackEmptyView
+	{
+		get => _stackEmptyView;
+		set { _stackEmptyView = value; OnPropertyChanged(); }
+	}
+
+	public object FlexEmptyView
+    {
+		get => _flexEmptyView;
+		set { _flexEmptyView = value; OnPropertyChanged(); }
+    }
+
 	public object EmptyView
 	{
 		get => _emptyView;
-		set { _emptyView = value; OnPropertyChanged(); }
+		set
+		{
+			if (_emptyView != value)
+			{
+				_emptyView = value;
+				OnPropertyChanged();
+			}
+		}
 	}
 
 	public DataTemplate EmptyViewTemplate
