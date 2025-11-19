@@ -1,15 +1,11 @@
 <Solution>
   <Folder Name="/BlazorWebView/" />
   <Folder Name="/BlazorWebView/samples/">
-    <Project Path="src/BlazorWebView/samples/BlazorWinFormsApp/BlazorWinFormsApp.csproj" />
-    <Project Path="src/BlazorWebView/samples/BlazorWpfApp/BlazorWpfApp.csproj" />
     <Project Path="src/BlazorWebView/samples/MauiRazorClassLibrarySample/MauiRazorClassLibrarySample.csproj" />
     <Project Path="src/BlazorWebView/samples/WebViewAppShared/WebViewAppShared.csproj" />
   </Folder>
   <Folder Name="/BlazorWebView/src/">
     <Project Path="src/BlazorWebView/src/Maui/Microsoft.AspNetCore.Components.WebView.Maui.csproj" />
-    <Project Path="src/BlazorWebView/src/WindowsForms/Microsoft.AspNetCore.Components.WebView.WindowsForms.csproj" />
-    <Project Path="src/BlazorWebView/src/Wpf/Microsoft.AspNetCore.Components.WebView.Wpf.csproj" />
   </Folder>
   <Folder Name="/BlazorWebView/src/SharedSource/">
     <File Path="src/BlazorWebView/src/SharedSource/AutoCloseOnReadCompleteStream.cs" />
@@ -121,22 +117,14 @@
     <Project Path="src/Graphics/samples/GraphicsTester.iOS/GraphicsTester.iOS.csproj">
       <Deploy />
     </Project>
-    <Project Path="src/Graphics/samples/GraphicsTester.Mac/GraphicsTester.Mac.csproj" />
     <Project Path="src/Graphics/samples/GraphicsTester.MacCatalyst/GraphicsTester.MacCatalyst.csproj" />
     <Project Path="src/Graphics/samples/GraphicsTester.Portable/GraphicsTester.Portable.csproj" />
     <Project Path="src/Graphics/samples/GraphicsTester.Skia.Console/GraphicsTester.Skia.Console.csproj" />
     <Project Path="src/Graphics/samples/GraphicsTester.Skia.Gtk/GraphicsTester.Skia.Gtk.csproj" />
-    <Project Path="src/Graphics/samples/GraphicsTester.Skia.Mac/GraphicsTester.Skia.Mac.csproj" />
-    <Project Path="src/Graphics/samples/GraphicsTester.Skia.Windows/GraphicsTester.Skia.Windows.csproj" />
-    <Project Path="src/Graphics/samples/GraphicsTester.WinUI.Desktop/GraphicsTester.WinUI.Desktop.csproj">
-      <Deploy />
-    </Project>
   </Folder>
   <Folder Name="/Graphics/src/">
     <Project Path="src/Graphics/src/Graphics.Skia.GtkSharp/Graphics.Skia.GtkSharp.csproj" />
-    <Project Path="src/Graphics/src/Graphics.Skia.WPF/Graphics.Skia.WPF.csproj" />
     <Project Path="src/Graphics/src/Graphics.Skia/Graphics.Skia.csproj" />
-    <Project Path="src/Graphics/src/Graphics.Win2D/Graphics.Win2D.csproj" />
     <Project Path="src/Graphics/src/Graphics/Graphics.csproj" />
     <Project Path="src/Graphics/src/Text.Markdig/Graphics.Text.Markdig.csproj" />
   </Folder>
