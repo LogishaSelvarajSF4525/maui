@@ -193,7 +193,6 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Normal"));
 	}
-#endif
 
 	[Test, Order(13)]
 	public void VerifyVSM_CollectionView_SelectAndUnselectItem_UsingTap()
@@ -210,6 +209,7 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Normal"));
 	}
+#endif
 
 	[Test, Order(14)]
 	public void VerifyVSM_CollectionView_SelectItem_UsingButton()
@@ -362,7 +362,6 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Disabled"));
 	}
-#endif
 
 	[Test, Order(21)]
 	public void VerifyVSM_CollectionView_UnselectWhileDisabled()
@@ -385,5 +384,6 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Disabled"));
 	}
+#endif
 }
 

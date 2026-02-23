@@ -70,12 +70,12 @@
                     FontAttributes="Bold"/>
 
             <Grid x:Name="SelectableLabelContainer"
-                    AutomationId="SelectableLabelContainer"
                     Style="{StaticResource SelectableLabelContainerStyle}">
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnToggleLabelSelected"/>
                 </Grid.GestureRecognizers>
                 <Label x:Name="ItemLabel"
+                        AutomationId="SelectableLabelContainer"
                         Text="Tap to select"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"/>
