@@ -4,6 +4,8 @@ namespace Maui.Controls.Sample;
 
 public partial class VisualStateManagerEntryPage : ContentPage
 {
+	bool _completedFired;
+
 	public VisualStateManagerEntryPage()
 	{
 		InitializeComponent();
@@ -47,6 +49,15 @@ public partial class VisualStateManagerEntryPage : ContentPage
 		}
 	}
 
+	void OnEntryCompleted(object sender, EventArgs e)
+	{
+		if (!VSMEntry.IsEnabled)
+			return;
+		_completedFired = true;
+		VisualStateManager.GoToState(VSMEntry, "Completed");
+		StateEntryLabel.Text = "State: Completed";
+	}
+
 	void OnEntryFocused(object sender, FocusEventArgs e)
 	{
 		if (!VSMEntry.IsEnabled)
@@ -58,6 +69,12 @@ public partial class VisualStateManagerEntryPage : ContentPage
 
 	void OnEntryUnfocused(object sender, FocusEventArgs e)
 	{
+		if (_completedFired)
+		{
+			_completedFired = false;
+			return;
+		}
+
 		if (VSMEntry.IsEnabled)
 		{
 			VisualStateManager.GoToState(VSMEntry, "Normal");
@@ -68,6 +85,7 @@ public partial class VisualStateManagerEntryPage : ContentPage
 
 	void OnResetEntry(object sender, EventArgs e)
 	{
+		_completedFired = false;
 		VSMEntry.IsEnabled = true;
 		DisableEntryButton.Text = "Disable";
 		VisualStateManager.GoToState(VSMEntry, "Normal");

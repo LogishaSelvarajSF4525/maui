@@ -5,7 +5,7 @@
              Title="VisualStateManagerEntryPage">
 
     <ContentPage.Resources>
-        <!-- Entry1 Style : Normal / Focused / Disabled -->
+        <!-- Entry1 Style : Normal / Focused / Disabled / Completed -->
         <Style TargetType="Entry"
                x:Key="EntryStateStyle">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -41,6 +41,16 @@
                                         Value="0.6"/>
                                 <Setter Property="Scale"
                                         Value="0.75"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Completed">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="#FF7B2FBE"/>
+                                <Setter Property="TextColor"
+                                        Value="White"/>
+                                <Setter Property="Scale"
+                                        Value="1.0"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -98,6 +108,7 @@
                            Style="{StaticResource EntryStateStyle}"
                            Focused="OnEntryFocused"
                            Unfocused="OnEntryUnfocused"
+                           Completed="OnEntryCompleted"
                            IsCursorVisible="False"/>
 
         <Label x:Name="StateEntryLabel"

@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.Label)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_LabelFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerLabelFeatureTests = "VisualStateManager Feature Matrix";
@@ -186,7 +186,7 @@ public class VisualStateManager_LabelFeatureTests : _GalleryUITest
 	}
 
 	[Test, Order(12)]
-	public void VerifyVSM_Label_SelectedToDisabledToNormal()
+	public void VerifyVSM_Label_CannotSelectWhileDisabled()
 	{
 		App.WaitForElement("LabelReset");
 		App.Tap("LabelReset");

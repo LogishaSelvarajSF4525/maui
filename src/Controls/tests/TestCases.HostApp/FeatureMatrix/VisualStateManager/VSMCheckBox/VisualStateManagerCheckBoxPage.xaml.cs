@@ -6,6 +6,7 @@ public partial class VisualStateManagerCheckBoxPage : ContentPage
 	{
 		InitializeComponent();
 		VisualStateManager.GoToState(VSMCheckBox, "Normal");
+		CheckBoxState.Text = "State: Normal";
 	}
 
 	void OnCheckBoxCheckedChanged(object sender, CheckedChangedEventArgs e)

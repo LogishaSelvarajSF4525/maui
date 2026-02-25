@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.Button)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerButtonFeatureTests = "VisualStateManager Feature Matrix";
@@ -14,8 +14,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		: base(device)
 	{
 	}
-
-#if TEST_FAILS_ON_ANDROID //related issue link: https://github.com/dotnet/maui/issues/19289
+// PointerOver states cannot currently be reliably covered in CI environments, as hover/pointer interactions are not consistently supported in automated runs. Therefore, these states are validated manually on Mac and Windows, and PointerOver-related tests have not been included in the automated test cases.
 	[Test, Order(1)]
 	public void VerifyVSM_Button_InitialState()
 	{
@@ -49,6 +48,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		VerifyScreenshot();
 	}
 
+#if TEST_FAILS_ON_ANDROID // Related issue link: https://github.com/dotnet/maui/issues/19289
 	[Test, Order(4)]
 	public void VerifyVSM_Button_PressedAndReleased()
 	{
@@ -93,6 +93,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		stateText = App.FindElement("ButtonStateLabel").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Normal"));
 	}
+#endif
 
 	[Test, Order(7)]
 	public void VerifyVSM_Button_ResetWhileDisabled()
@@ -111,6 +112,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		Assert.That(stateText, Is.EqualTo("State: Normal"));
 	}
 
+#if TEST_FAILS_ON_ANDROID // Related issue link: https://github.com/dotnet/maui/issues/19289
 	[Test, Order(8)]
 	public void VerifyVSM_Button_PressedAndReleasedWhileDisabled()
 	{
@@ -127,6 +129,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		stateText = App.FindElement("ButtonStateLabel").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Disabled"));
 	}
+#endif
 
 	[Test, Order(9)]
 	public void VerifyVSM_Button_DisableAndEnable()
@@ -145,6 +148,7 @@ public class VisualStateManager_ButtonFeatureTests : _GalleryUITest
 		Assert.That(stateText, Is.EqualTo("State: Normal"));
 	}
 
+#if TEST_FAILS_ON_ANDROID // Related issue link: https://github.com/dotnet/maui/issues/19289
 	[Test, Order(10)]
 	public void VerifyVSM_Button_DisableAndEnableWhilePressedAndReleased()
 	{

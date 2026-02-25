@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.CollectionView)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerCollectionViewFeatureTests = "VisualStateManager Feature Matrix";
@@ -14,7 +14,7 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		: base(device)
 	{
 	}
-
+// PointerOver states cannot currently be reliably covered in CI environments, as hover/pointer interactions are not consistently supported in automated runs. Therefore, these states are validated manually on Mac and Windows, and PointerOver-related tests have not been included in the automated test cases.
 	[Test, Order(1)]
 	public void VerifyVSM_CollectionView_InitialState()
 	{
@@ -250,8 +250,8 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 	}
 #endif
 
-#if TEST_FAILS_ON_ANDROID && TEST_FAILS_ON_IOS && TEST_FAILS_ON_CATALYST && TEST_FAILS_ON_WINDOWS //related issue: https://github.com/dotnet/maui/issues/20615
 	[Test, Order(16)]
+	[Ignore("Fails on all platforms. Related issue: https://github.com/dotnet/maui/issues/20615")]
 	public void VerifyVSM_CollectionView_DisableAndEnableWhileSelected()
 	{
 		App.WaitForElement("CVReset");
@@ -272,7 +272,6 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText,Is.EqualTo("State: Selected (1)"));
 	}
-#endif
 
 	[Test, Order(17)]
 	public void VerifyVSM_CollectionView_DisableAndEnableWhileUnselected()
@@ -324,8 +323,8 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 	}
 #endif
 
-#if TEST_FAILS_ON_ANDROID && TEST_FAILS_ON_IOS && TEST_FAILS_ON_CATALYST && TEST_FAILS_ON_WINDOWS //related issue: https://github.com/dotnet/maui/issues/20615
 	[Test, Order(19)]
+	[Ignore("Fails on all platforms. Related issue: https://github.com/dotnet/maui/issues/20615")]
 	public void VerifyVSM_CollectionView_SelectedWhileDisabled()
 	{
 		App.WaitForElement("CVReset");
@@ -343,6 +342,7 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 	}
 
 	[Test, Order(20)]
+	[Ignore("Fails on all platforms. Related issue: https://github.com/dotnet/maui/issues/20615")]
 	public void VerifyVSM_CollectionView_SelectedMultipleWhileDisabled()
 	{
 		App.WaitForElement("CVReset");
@@ -364,6 +364,7 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 	}
 
 	[Test, Order(21)]
+	[Ignore("Fails on all platforms. Related issue: https://github.com/dotnet/maui/issues/20615")]
 	public void VerifyVSM_CollectionView_UnselectWhileDisabled()
 	{
 		App.WaitForElement("CVReset");
@@ -384,6 +385,5 @@ public class VisualStateManager_CollectionViewFeatureTests : _GalleryUITest
 		stateText = App.FindElement("CVState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Disabled"));
 	}
-#endif
 }
 

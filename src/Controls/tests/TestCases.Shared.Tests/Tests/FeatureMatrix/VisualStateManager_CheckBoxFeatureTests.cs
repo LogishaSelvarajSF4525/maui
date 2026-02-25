@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.CheckBox)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_CheckBoxFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerCheckBoxFeatureTests = "VisualStateManager Feature Matrix";
@@ -22,7 +22,7 @@ public class VisualStateManager_CheckBoxFeatureTests : _GalleryUITest
 		App.Tap("VSMCheckBoxButton");
 		App.WaitForElement("CheckBoxState");
 		var stateText = App.FindElement("CheckBoxState").GetText();
-		Assert.That(stateText, Is.EqualTo("State: Unchecked"));
+		Assert.That(stateText, Is.EqualTo("State: Normal"));
 		VerifyScreenshot();
 	}
 

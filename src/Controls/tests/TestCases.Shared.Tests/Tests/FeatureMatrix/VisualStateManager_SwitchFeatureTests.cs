@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.Switch)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_SwitchFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerSwitchFeatureTests = "VisualStateManager Feature Matrix";

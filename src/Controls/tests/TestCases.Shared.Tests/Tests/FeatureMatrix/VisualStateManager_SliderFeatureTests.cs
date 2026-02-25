@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.Slider)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_SliderFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerSliderFeatureTests = "VisualStateManager Feature Matrix";
@@ -64,7 +64,7 @@ public class VisualStateManager_SliderFeatureTests : _GalleryUITest
 	{
 		App.WaitForElement("SliderFocus");
 		App.Tap("SliderFocus");
-		App.WaitForElement("SliderState");	
+		App.WaitForElement("SliderState");
 		var stateText = App.FindElement("SliderState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Focused | Value: 65"));
 		VerifyScreenshot();
@@ -99,7 +99,7 @@ public class VisualStateManager_SliderFeatureTests : _GalleryUITest
 		App.WaitForElement("SliderState");
 		var stateText = App.FindElement("SliderState").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Normal/Unfocused | Value: 50"));
-	    App.WaitForElement("SliderReset");
+		App.WaitForElement("SliderReset");
 		App.Tap("SliderReset");
 		App.WaitForElement("SliderState");
 		var resetStateText = App.FindElement("SliderState").GetText();
@@ -233,7 +233,7 @@ public class VisualStateManager_SliderFeatureTests : _GalleryUITest
 		App.WaitForElement("SliderDisable");
 		App.Tap("SliderDisable");
 		App.WaitForElement("SliderState");
-		var disabledStateText = App.FindElement("SliderState").GetText();	
+		var disabledStateText = App.FindElement("SliderState").GetText();
 		Assert.That(disabledStateText, Is.EqualTo("State: Disabled | Value: 50"));
 		App.WaitForElement("SliderDisable");
 		App.Tap("SliderDisable");
@@ -284,6 +284,42 @@ public class VisualStateManager_SliderFeatureTests : _GalleryUITest
 		App.WaitForElement("SliderState");
 		var unfocusedEnabledStateText = App.FindElement("SliderState").GetText();
 		Assert.That(unfocusedEnabledStateText, Is.EqualTo("State: Normal | Value: 50"));
+	}
+
+	[Test, Order(17)]
+	public void VerifyVSM_Slider_DragToFocus()
+	{
+		App.WaitForElement("VSMSlider");
+		App.WaitForElement("SliderReset");
+		App.Tap("SliderReset");
+		App.WaitForElement("VSMSlider");
+		var sliderRect = App.WaitForElement("VSMSlider").GetRect();
+		var startX = sliderRect.X + (sliderRect.Width * 50 / 100);
+		var centerY = sliderRect.Y + (sliderRect.Height / 2);
+		var endX = sliderRect.X + (sliderRect.Width * 35 / 100);
+		App.DragCoordinates(startX, centerY, endX, centerY);
+		App.WaitForElement("SliderState");
+		var focusedStateText = App.FindElement("SliderState").GetText();
+		Assert.That(focusedStateText, Does.Contain("State: Focused"));
+	}
+
+	[Test, Order(18)]
+	public void VerifyVSM_Slider_DragWhileDisabled()
+	{
+		App.WaitForElement("VSMSlider");
+		App.WaitForElement("SliderReset");
+		App.Tap("SliderReset");
+		App.WaitForElement("SliderDisable");
+		App.Tap("SliderDisable");
+		App.WaitForElement("VSMSlider");
+		var sliderRect = App.WaitForElement("VSMSlider").GetRect();
+		var startX = sliderRect.X + (sliderRect.Width * 50 / 100);
+		var centerY = sliderRect.Y + (sliderRect.Height / 2);
+		var endX = sliderRect.X + (sliderRect.Width * 35 / 100);
+		App.DragCoordinates(startX, centerY, endX, centerY);
+		App.WaitForElement("SliderState");
+		var disabledStateText = App.FindElement("SliderState").GetText();
+		Assert.That(disabledStateText, Is.EqualTo("State: Disabled | Value: 50"));
 	}
 }
 

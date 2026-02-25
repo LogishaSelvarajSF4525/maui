@@ -4,7 +4,7 @@ using UITest.Core;
 
 namespace Microsoft.Maui.TestCases.Tests;
 
-[Category(UITestCategories.Entry)]
+[Category(UITestCategories.VisualStateManager)]
 public class VisualStateManager_EntryFeatureTests : _GalleryUITest
 {
 	public const string VisualStateManagerEntryFeatureTests = "VisualStateManager Feature Matrix";
@@ -329,5 +329,75 @@ public class VisualStateManager_EntryFeatureTests : _GalleryUITest
 		stateText = App.FindElement("ValidationEntryLabel").GetText();
 		Assert.That(stateText, Is.EqualTo("State: Invalid"));
 	}
+#if TEST_FAILS_ON_ANDROID // When PressEnter() is triggered to verify the Completed state, the Entry automatically becomes visually unfocused. Therefore, the test currently fails on Android in automation but passes during manual testing.
+	[Test, Order(19)]
+	public void VerifyVSM_Entry_Completed()
+	{
+		App.WaitForElement("ResetEntryButton");
+		App.Tap("ResetEntryButton");
+		App.WaitForElement("VSMEntry");
+		App.Tap("VSMEntry");
+		App.EnterText("VSMEntry", "Hello");
+		App.PressEnter();
+		App.WaitForElement("EntryState");
+		var stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Completed"));
+		VerifyScreenshot();
+	}
+
+	[Test, Order(20)]
+	public void VerifyVSM_Entry_CompletedAndReset()
+	{
+		App.WaitForElement("ResetEntryButton");
+		App.Tap("ResetEntryButton");
+		App.WaitForElement("VSMEntry");
+		App.Tap("VSMEntry");
+		App.EnterText("VSMEntry", "Hello");
+		App.PressEnter();
+		App.WaitForElement("EntryState");
+		var stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Completed"));
+		App.WaitForElement("ResetEntryButton");
+		App.Tap("ResetEntryButton");
+		stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Normal"));
+	}
+
+	[Test, Order(21)]
+	public void VerifyVSM_Entry_CompletedAndRefocused()
+	{
+		App.WaitForElement("ResetEntryButton");
+		App.Tap("ResetEntryButton");
+		App.WaitForElement("VSMEntry");
+		App.Tap("VSMEntry");
+		App.EnterText("VSMEntry", "Hello");
+		App.PressEnter();
+		App.WaitForElement("EntryState");
+		var stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Completed"));
+		App.WaitForElement("FocusEntryButton");
+		App.Tap("FocusEntryButton");
+		stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Focused"));
+	}
+
+	[Test, Order(22)]
+	public void VerifyVSM_Entry_DisableWhileCompleted()
+	{
+		App.WaitForElement("ResetEntryButton");
+		App.Tap("ResetEntryButton");
+		App.WaitForElement("VSMEntry");
+		App.Tap("VSMEntry");
+		App.EnterText("VSMEntry", "Hello");
+		App.PressEnter();
+		App.WaitForElement("EntryState");
+		var stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Completed"));
+		App.WaitForElement("DisableEntryButton");
+		App.Tap("DisableEntryButton");
+		stateText = App.FindElement("EntryState").GetText();
+		Assert.That(stateText, Is.EqualTo("State: Disabled"));
+	}
+#endif
 }
 
