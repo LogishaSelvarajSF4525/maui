@@ -264,6 +264,20 @@ namespace Microsoft.Maui.Platform
 #endif
 		}
 
+		public static void UpdateBackground(this MauiTextField textField, IEntry entry)
+		{
+			if (entry.Background.IsNullOrEmpty())
+			{
+				textField.RemoveBackgroundLayer();
+				// Resetting to null restores the system rounded-rect appearance; UIKit
+				// renders the field's default background when BackgroundColor is unset.
+				textField.BackgroundColor = null;
+				return;
+			}
+
+			ViewExtensions.UpdateBackground(textField, entry.Background);
+		}
+
 		static void OnDoneClicked(object sender)
 		{
 			if (sender is IEntryHandler entryHandler)

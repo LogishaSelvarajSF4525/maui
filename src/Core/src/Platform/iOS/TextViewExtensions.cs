@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Maui.Graphics;
 using ObjCRuntime;
 using UIKit;
 
@@ -186,6 +187,21 @@ namespace Microsoft.Maui.Platform
 			accessoryView.SetDoneClicked(OnDoneClicked);
 			textView.InputAccessoryView = accessoryView;
 #endif
+		}
+
+		public static void UpdateBackground(this MauiTextView textView, IEditor editor)
+		{
+			if (editor.Background.IsNullOrEmpty())
+			{
+				textView.RemoveBackgroundLayer();
+				// UITextView has no border-style system appearance, so we restore the
+				// system background color (SystemBackground on iOS 13+, White on older).
+				// Unlike UITextField, setting null here would make the view transparent.
+				textView.BackgroundColor = ColorExtensions.BackgroundColor;
+				return;
+			}
+
+			ViewExtensions.UpdateBackground(textView, editor.Background);
 		}
 
 		static void OnDoneClicked(object sender)

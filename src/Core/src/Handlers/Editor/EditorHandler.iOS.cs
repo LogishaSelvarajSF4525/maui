@@ -3,6 +3,7 @@ using CoreGraphics;
 using Foundation;
 using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Platform;
 using UIKit;
 
 namespace Microsoft.Maui.Handlers
@@ -75,6 +76,9 @@ namespace Microsoft.Maui.Handlers
 
 			return base.GetDesiredSize(widthConstraint, heightConstraint);
 		}
+
+		public static void MapBackground(IEditorHandler handler, IEditor editor) =>
+			handler.PlatformView?.UpdateBackground(editor);
 
 		public static void MapText(IEditorHandler handler, IEditor editor)
 		{

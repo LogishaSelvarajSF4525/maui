@@ -40,6 +40,9 @@ namespace Microsoft.Maui.Handlers
 			_proxy.Disconnect(platformView);
 		}
 
+		public static void MapBackground(IEntryHandler handler, IEntry entry) =>
+			handler.PlatformView?.UpdateBackground(entry);
+
 		public static void MapText(IEntryHandler handler, IEntry entry)
 		{
 			handler.PlatformView?.UpdateText(entry);
