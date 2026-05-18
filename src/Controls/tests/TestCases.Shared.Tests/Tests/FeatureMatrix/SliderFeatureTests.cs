@@ -1089,5 +1089,53 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("NewValueLabel").GetText(), Is.EqualTo("0.00"));
 		}
 
+		[Test]
+		[Category(UITestCategories.Slider)]
+		public void Slider_SetHeightRequest_VerifyVisualState()
+		{
+			App.WaitForElement("Options");
+			App.Tap("Options");
+			App.WaitForElement("HeightRequestEntry");
+			App.ClearText("HeightRequestEntry");
+			App.EnterText("HeightRequestEntry", "80");
+			App.PressEnter();
+			App.WaitForElement("Apply");
+			App.Tap("Apply");
+			App.WaitForElementTillPageNavigationSettled("SliderControl");
+			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
+		}
+
+		[Test]
+		[Category(UITestCategories.Slider)]
+		public void Slider_SetWidthRequest_VerifyVisualState()
+		{
+			App.WaitForElement("Options");
+			App.Tap("Options");
+			App.WaitForElement("WidthRequestEntry");
+			App.ClearText("WidthRequestEntry");
+			App.EnterText("WidthRequestEntry", "200");
+			App.PressEnter();
+			App.WaitForElement("Apply");
+			App.Tap("Apply");
+			App.WaitForElementTillPageNavigationSettled("SliderControl");
+			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
+		}
+
+		[Test]
+		[Category(UITestCategories.Slider)]
+		public void Slider_SetOpacity_VerifyVisualState()
+		{
+			App.WaitForElement("Options");
+			App.Tap("Options");
+			App.WaitForElement("OpacityEntry");
+			App.ClearText("OpacityEntry");
+			App.EnterText("OpacityEntry", "0.3");
+			App.PressEnter();
+			App.WaitForElement("Apply");
+			App.Tap("Apply");
+			App.WaitForElementTillPageNavigationSettled("SliderControl");
+			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
+		}
+
 	}
 }

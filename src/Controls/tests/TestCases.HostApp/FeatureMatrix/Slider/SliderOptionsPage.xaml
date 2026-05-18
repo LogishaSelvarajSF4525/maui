@@ -38,6 +38,15 @@
         <RadioButton x:Name="IsVisibleTrueRadio" AutomationId="IsVisibleTrueRadio" GroupName="IsVisible" Content="True" IsChecked="True" FontSize="14" CheckedChanged="OnIsVisibleCheckedChanged" />
         <RadioButton x:Name="IsVisibleFalseRadio" AutomationId="IsVisibleFalseRadio" GroupName="IsVisible" Content="False" FontSize="14" CheckedChanged="OnIsVisibleCheckedChanged" />
       </StackLayout>
+      <!-- Height Request -->
+      <Label Text="{Binding HeightRequest, StringFormat='HeightRequest: {0}'}" FontSize="15" />
+      <Entry x:Name="HeightRequestEntry" AutomationId="HeightRequestEntry" TextChanged="OnHeightRequestChanged" Keyboard="Numeric" HorizontalOptions="Start" WidthRequest="100" />
+      <!-- Width Request -->
+      <Label Text="{Binding WidthRequest, StringFormat='WidthRequest: {0}'}" FontSize="15" />
+      <Entry x:Name="WidthRequestEntry" AutomationId="WidthRequestEntry" TextChanged="OnWidthRequestChanged" Keyboard="Numeric" HorizontalOptions="Start" WidthRequest="100" />
+      <!-- Opacity -->
+      <Label Text="{Binding Opacity, StringFormat='Opacity: {0}'}" FontSize="15" />
+      <Entry x:Name="OpacityEntry" AutomationId="OpacityEntry" TextChanged="OnOpacityChanged" Keyboard="Numeric" HorizontalOptions="Start" WidthRequest="100" />
     </StackLayout>
 
     <StackLayout Grid.Column="1" Padding="10" Spacing="12">
