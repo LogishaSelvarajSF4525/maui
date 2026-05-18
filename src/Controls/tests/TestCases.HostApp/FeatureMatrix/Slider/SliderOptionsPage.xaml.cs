@@ -105,5 +105,29 @@ namespace Maui.Controls.Sample
 		{
 			_viewModel.ThumbImageSource = null;
 		}
+
+		private void OnHeightRequestChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(HeightRequestEntry.Text, out double height))
+			{
+				_viewModel.HeightRequest = height;
+			}
+		}
+
+		private void OnWidthRequestChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(WidthRequestEntry.Text, out double width))
+			{
+				_viewModel.WidthRequest = width;
+			}
+		}
+
+		private void OnOpacityChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(OpacityEntry.Text, out double opacity))
+			{
+				_viewModel.Opacity = opacity;
+			}
+		}
 	}
 }

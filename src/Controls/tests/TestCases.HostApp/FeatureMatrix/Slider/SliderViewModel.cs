@@ -22,6 +22,9 @@ namespace Maui.Controls.Sample
 		private string _dragStartStatus;
 		private string _dragCompletedStatus;
 		private bool _isEventStatusLabelVisible = false;
+		private double _heightRequest = -1;
+		private double _widthRequest = -1;
+		private double _opacity = 1.0;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -265,6 +268,45 @@ namespace Maui.Controls.Sample
 		}
 
 
+
+		public double HeightRequest
+		{
+			get => _heightRequest;
+			set
+			{
+				if (_heightRequest != value)
+				{
+					_heightRequest = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public double WidthRequest
+		{
+			get => _widthRequest;
+			set
+			{
+				if (_widthRequest != value)
+				{
+					_widthRequest = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public double Opacity
+		{
+			get => _opacity;
+			set
+			{
+				if (_opacity != value)
+				{
+					_opacity = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
 		public ICommand DragStartedCommand { get; }
 		public ICommand DragCompletedCommand { get; }
