@@ -34,6 +34,9 @@
               ThumbImageSource="{Binding ThumbImageSource}"
               DragStartedCommand="{Binding DragStartedCommand}"
               DragCompletedCommand="{Binding DragCompletedCommand}"
+              HeightRequest="{Binding HeightRequest}"
+              WidthRequest="{Binding WidthRequest}"
+              Opacity="{Binding Opacity}"
               Margin="0,100,0,100"
               AutomationId="SliderControl"
               ValueChanged="OnSliderValueChanged"/>
