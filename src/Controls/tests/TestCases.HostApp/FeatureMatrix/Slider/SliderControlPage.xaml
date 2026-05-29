@@ -38,6 +38,8 @@
               WidthRequest="{Binding WidthRequest}"
               Opacity="{Binding Opacity}"
               Margin="0,100,0,100"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
               AutomationId="SliderControl"
               ValueChanged="OnSliderValueChanged"/>
     </Grid>
