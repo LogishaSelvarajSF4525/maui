@@ -34,6 +34,30 @@ namespace Maui.Controls.Sample
 			DragCompletedCommand = new Command(OnDragCompleted);
 		}
 
+		public void Reset()
+		{
+			Minimum = 0;
+			Maximum = 1;
+			Value = 0;
+			ThumbColor = null;
+			MinTrackColor = null;
+			MaxTrackColor = null;
+			BackgroundColor = null;
+			FlowDirection = FlowDirection.LeftToRight;
+			IsEnabled = true;
+			IsVisible = true;
+			ThumbImageSource = null;
+			DragStartStatus = null;
+			DragCompletedStatus = null;
+			IsEventStatusLabelVisible = false;
+			HeightRequest = -1;
+			WidthRequest = -1;
+			Opacity = 1.0;
+			ValueChangedStatus = "Not Raised";
+			OldValue = 0;
+			NewValue = 0;
+		}
+
 		public double Minimum
 		{
 			get => _minimum;

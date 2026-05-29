@@ -27,9 +27,8 @@ namespace Maui.Controls.Sample
 
 		private async void NavigateToOptionsPage_Clicked(object sender, EventArgs e)
 		{
-			BindingContext = _viewModel = new SliderViewModel();
+			_viewModel.Reset();
 			ReInitializeSlider();
-			_viewModel.ValueChangedStatus = "Not Raised";
 			await Navigation.PushAsync(new SliderOptionsPage(_viewModel));
 		}
 
@@ -40,6 +39,8 @@ namespace Maui.Controls.Sample
 			var slider = new Slider
 			{
 				Margin = new Thickness(0, 100, 0, 100),
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.Center,
 				AutomationId = "SliderControl"
 			};
 
@@ -57,6 +58,9 @@ namespace Maui.Controls.Sample
 			slider.SetBinding(Slider.ThumbImageSourceProperty, new Binding("ThumbImageSource"));
 			slider.SetBinding(Slider.DragStartedCommandProperty, new Binding("DragStartedCommand"));
 			slider.SetBinding(Slider.DragCompletedCommandProperty, new Binding("DragCompletedCommand"));
+			slider.SetBinding(VisualElement.HeightRequestProperty, new Binding("HeightRequest"));
+			slider.SetBinding(VisualElement.WidthRequestProperty, new Binding("WidthRequest"));
+			slider.SetBinding(VisualElement.OpacityProperty, new Binding("Opacity"));
 
 			slider.ValueChanged += OnSliderValueChanged;
 

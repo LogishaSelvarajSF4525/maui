@@ -26,7 +26,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("0.00"));
 		}
 
-		[Test]
+		[Test, Order(2)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinimumValue_VerifyMaximumLabel()
 		{
@@ -41,7 +41,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("MinimumValueLabel").GetText(), Is.EqualTo("3.00"));
 		}
 
-		[Test]
+		[Test, Order(3)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaximumValue_VerifyMinimumLabel()
 		{
@@ -56,7 +56,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("MaximumValueLabel").GetText(), Is.EqualTo("20.00"));
 		}
 
-		[Test]
+		[Test, Order(4)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetCurrentValue_VerifyValueLabel()
 		{
@@ -71,7 +71,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("1.00"));
 		}
 
-		[Test]
+		[Test, Order(5)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueExceedsMaximum()
 		{
@@ -88,7 +88,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("100.00"));
 		}
 
-		[Test]
+		[Test, Order(6)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueWithinRange()
 		{
@@ -105,7 +105,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("50.00"));
 		}
 
-		[Test]
+		[Test, Order(7)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinimumValue_CheckValueLabel()
 		{
@@ -122,7 +122,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("-2.00"));
 		}
 
-		[Test]
+		[Test, Order(8)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_MinimumExceedsMaximum_SetsMaximumToMinimum()
 		{
@@ -138,7 +138,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			App.WaitForElementTillPageNavigationSettled("SliderControl");
 			Assert.That(App.FindElement("MaximumValueLabel").GetText(), Is.EqualTo("25.00"));
 		}
-		[Test]
+		[Test, Order(9)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ValueAboveMaximum_CheckMaximumLabel()
 		{
@@ -155,7 +155,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("MaximumValueLabel").GetText(), Is.EqualTo("50.00"));
 		}
 
-		[Test]
+		[Test, Order(10)]
 		[Category(UITestCategories.Slider)]
 		public void MinimumIsSetNegativeMaximumShouldNotChangeDefaultValue()
 		{
@@ -170,7 +170,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("MaximumValueLabel").GetText(), Is.EqualTo("1.00"));
 		}
 
-		[Test]
+		[Test, Order(11)]
 		[Category(UITestCategories.Slider)]
 		public void SliderCurrentValueHigherThanMinimumAndMaximumTest()
 		{
@@ -189,7 +189,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("50.00"));
 		}
 
-		[Test]
+		[Test, Order(12)]
 		[Category(UITestCategories.Slider)]
 		public void CurrentValueIsSetToMinimum()
 		{
@@ -211,7 +211,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("20.00"));
 		}
 
-		[Test]
+		[Test, Order(13)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinimumAboveMaximum()
 		{
@@ -228,7 +228,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("MinimumValueLabel").GetText(), Is.EqualTo("60.00"));
 		}
 
-		[Test]
+		[Test, Order(14)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ValueBelowMinimum_CheckMinimumLabel()
 		{
@@ -246,7 +246,7 @@ namespace Microsoft.Maui.TestCases.Tests
 		}
 
 #if TEST_FAILS_ON_CATALYST && TEST_FAILS_ON_WINDOWS // SetSliderValue method not supported on Catalyst and windows
-		[Test, Order(2)]
+		[Test, Order(15)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_DragStartedAndCompletedEventTrigged()
 		{
@@ -258,7 +258,7 @@ namespace Microsoft.Maui.TestCases.Tests
 		}
 #endif
 
-		[Test]
+		[Test, Order(16)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetEnabledStateToFalse_VerifyVisualState()
 		{
@@ -272,7 +272,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(17)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeFlowDirection_RTL_VerifyVisualState()
 		{
@@ -286,7 +286,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(18)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetVisibilityToFalse_VerifyVisualState()
 		{
@@ -300,7 +300,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(19)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeThumbColor_VerifyVisualState()
 		{
@@ -314,7 +314,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(20)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeMinTrackColor_VerifyVisualState()
 		{
@@ -328,7 +328,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(21)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeMaxTrackColor_VerifyVisualState()
 		{
@@ -342,7 +342,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(22)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeBackgroundColor_VerifyVisualState()
 		{
@@ -356,7 +356,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(23)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ChangeThumbImageSource_VerifyVisualState()
 		{
@@ -374,7 +374,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(24)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetThumbImageSourceAndReset_VerifyVisualState()
 		{
@@ -389,7 +389,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(25)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinimumAndChangeFlowDirection_RTL()
 		{
@@ -405,7 +405,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(26)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaximumAndChangeFlowDirection_RTL()
 		{
@@ -421,7 +421,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(27)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueAndMinTrackColor_VerifyVisualState()
 		{
@@ -437,7 +437,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(28)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueAndMaxTrackColor_VerifyVisualState()
 		{
@@ -453,7 +453,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(29)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueAndThumbImageSource_VerifyVisualState()
 		{
@@ -473,7 +473,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(30)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetValueAndFlowDirection_RTL_VerifyVisualState()
 		{
@@ -489,7 +489,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(31)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetThumbAndMaxTrackColor_VerifyVisualState()
 		{
@@ -504,7 +504,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(32)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetThumbAndMinTrackColor_VerifyVisualState()
 		{
@@ -519,7 +519,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(33)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetThumbAndBackgroundColor_VerifyVisualState()
 		{
@@ -534,7 +534,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(34)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetThumbColorAndThumbImageSource_VerifyVisualState()
 		{
@@ -553,7 +553,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(35)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinTrackColorAndValue_VerifyVisualState()
 		{
@@ -569,7 +569,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(36)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinTrackAndThumbColor_VerifyVisualState()
 		{
@@ -584,7 +584,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(37)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinTrackAndMaxTrackColor_VerifyVisualState()
 		{
@@ -599,7 +599,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(38)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinTrackAndBackgroundColor_VerifyVisualState()
 		{
@@ -614,7 +614,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(39)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMinTrackColorTestFlowDirection_VerifyVisualState()
 		{
@@ -629,7 +629,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(40)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaxTrackColorAndValue_VerifyVisualState()
 		{
@@ -645,7 +645,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(41)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaxTrackAndThumbColor_VerifyVisualState()
 		{
@@ -660,7 +660,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(42)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaxTrackAndMinTrackColor_VerifyVisualState()
 		{
@@ -675,7 +675,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(43)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaxTrackAndBackgroundColor_VerifyVisualState()
 		{
@@ -690,7 +690,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(44)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetMaxTrackColorTestFlowDirection_VerifyVisualState()
 		{
@@ -705,7 +705,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(45)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsEnableAndThumbColor_VerifyVisualState()
 		{
@@ -720,7 +720,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(46)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsEnableAndMinTrackColor_VerifyVisualState()
 		{
@@ -735,7 +735,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(47)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsEnableAndMaxTrackColor_VerifyVisualState()
 		{
@@ -750,7 +750,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(48)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsEnableAndBackgroundColor_VerifyVisualState()
 		{
@@ -765,7 +765,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(49)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsVisibleAndThumbColor_VerifyVisualState()
 		{
@@ -780,7 +780,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(50)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsVisibleAndMinTrackColor_VerifyVisualState()
 		{
@@ -795,7 +795,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(51)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsVisibleAndMaxTrackColor_VerifyVisualState()
 		{
@@ -810,7 +810,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(52)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetIsVisibleAndBackgroundColor_VerifyVisualState()
 		{
@@ -824,7 +824,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(53)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetBackgroundColorAndThumbColor_VerifyVisualState()
 		{
@@ -839,7 +839,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(54)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetBackgroundColorAndMinTrackColor_VerifyVisualState()
 		{
@@ -854,7 +854,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(55)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetBackgroundColorAndMaxTrackColor_VerifyVisualState()
 		{
@@ -869,7 +869,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(56)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetBackgroundColorAndIsEnable_VerifyVisualState()
 		{
@@ -884,7 +884,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(57)]
 		[Category(UITestCategories.Slider)]
 
 		public void Slider_SetThumbImageSourceAndThumbColor_VerifyVisualState()
@@ -904,7 +904,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(58)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_FlowDirection_RTL_SetMinimumValue_VerifyVisualState()
 		{
@@ -920,7 +920,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(59)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_FlowDirection_RTL_SetMaximumValue_VerifyVisualState()
 		{
@@ -936,7 +936,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(60)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_FlowDirection_RTL_SetValue_VerifyVisualState()
 		{
@@ -952,7 +952,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(61)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetFlowDirectionAndMinTrackColor_VerifyVisualState()
 		{
@@ -967,7 +967,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(62)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetFlowDirectionAndMaxTrackColor_VerifyVisualState()
 		{
@@ -982,7 +982,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test, Order(3)]
+		[Test, Order(63)]
 		[Category(UITestCategories.Slider)]
 
 		public void Slider_ValueChangedEvent_NotRaised_Initially()
@@ -999,7 +999,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(eventStatus, Is.EqualTo("Not Raised"));
 		}
 
-		[Test, Order(4)]
+		[Test, Order(64)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ValueChangedEvent_VerifyArguments_FromOptions()
 		{
@@ -1038,7 +1038,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("NewValueLabel").GetText(), Is.EqualTo("2.00"));
 		}
 
-		[Test, Order(5)]
+		[Test, Order(65)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ValueChangedEvent_ClampedToMaximum_VerifyArguments()
 		{
@@ -1062,7 +1062,7 @@ namespace Microsoft.Maui.TestCases.Tests
 		}
 
 
-		[Test, Order(6)]
+		[Test, Order(66)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_ValueBelowMinimum_EventNotRaised_WithClampedValue()
 		{
@@ -1089,7 +1089,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			Assert.That(App.FindElement("NewValueLabel").GetText(), Is.EqualTo("0.00"));
 		}
 
-		[Test]
+		[Test, Order(67)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetHeightRequest_VerifyVisualState()
 		{
@@ -1105,7 +1105,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(68)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetWidthRequest_VerifyVisualState()
 		{
@@ -1121,7 +1121,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 
-		[Test]
+		[Test, Order(69)]
 		[Category(UITestCategories.Slider)]
 		public void Slider_SetOpacity_VerifyVisualState()
 		{
