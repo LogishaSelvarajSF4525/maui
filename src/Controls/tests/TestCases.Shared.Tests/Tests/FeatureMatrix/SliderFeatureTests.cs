@@ -124,7 +124,7 @@ namespace Microsoft.Maui.TestCases.Tests
 
 		[Test, Order(8)]
 		[Category(UITestCategories.Slider)]
-		public void Slider_MinimumExceedsMaximum_SetsMaximumToMinimum()
+		public void Slider_MinimumExceedsMaximum_VerifyMaximumLabel()
 		{
 			App.WaitForElement("Options");
 			App.Tap("Options");
@@ -157,7 +157,7 @@ namespace Microsoft.Maui.TestCases.Tests
 
 		[Test, Order(10)]
 		[Category(UITestCategories.Slider)]
-		public void MinimumIsSetNegativeMaximumShouldNotChangeDefaultValue()
+		public void Slider_SetNegativeMinimum_DoesNotChangeDefaultMaximum()
 		{
 			App.WaitForElement("Options");
 			App.Tap("Options");
@@ -172,7 +172,7 @@ namespace Microsoft.Maui.TestCases.Tests
 
 		[Test, Order(11)]
 		[Category(UITestCategories.Slider)]
-		public void SliderCurrentValueHigherThanMinimumAndMaximumTest()
+		public void Slider_CurrentValueHigherThanMinimumAndMaximum_ClampsToMaximum()
 		{
 			App.WaitForElement("Options");
 			App.Tap("Options");
@@ -191,7 +191,7 @@ namespace Microsoft.Maui.TestCases.Tests
 
 		[Test, Order(12)]
 		[Category(UITestCategories.Slider)]
-		public void CurrentValueIsSetToMinimum()
+		public void Slider_CurrentValueIsSetToMinimum()
 		{
 			App.WaitForElement("Options");
 			App.Tap("Options");
@@ -255,6 +255,26 @@ namespace Microsoft.Maui.TestCases.Tests
 			Task.Delay(TimeSpan.FromSeconds(1)).Wait();
 			Assert.That(App.WaitForElement("DragStartStatusLabel").GetText(), Is.EqualTo("Drag Started"));
 			Assert.That(App.WaitForElement("DragCompletedStatusLabel").GetText(), Is.EqualTo("Drag Completed"));
+		}
+
+		[Test, Order(70)]
+		[Category(UITestCategories.Slider)]
+		public void Slider_IsEnabledFalse_DragDoesNotChangeValue()
+		{
+			App.WaitForElement("Options");
+			App.Tap("Options");
+			App.WaitForElement("IsEnabledFalseRadio");
+			App.Tap("IsEnabledFalseRadio");
+			App.WaitForElement("Apply");
+			App.Tap("Apply");
+			App.WaitForElementTillPageNavigationSettled("SliderControl");
+
+			App.SetSliderValue("SliderControl", 0, 1);
+			Task.Delay(TimeSpan.FromSeconds(1)).Wait();
+
+			// Value should remain at default (0.00) because the slider is disabled.
+			Assert.That(App.FindElement("ValueLabel").GetText(), Is.EqualTo("0.00"));
+			Assert.That(App.FindElement("ValueChangedEventStatus").GetText(), Is.EqualTo("Not Raised"));
 		}
 #endif
 
@@ -817,6 +837,7 @@ namespace Microsoft.Maui.TestCases.Tests
 			App.WaitForElement("Options");
 			App.Tap("Options");
 			App.WaitForElement("IsVisibleTrueRadio");
+			App.Tap("IsVisibleTrueRadio");
 			App.Tap("BackgroundColorLightBlueButton");
 			App.WaitForElement("Apply");
 			App.Tap("Apply");
@@ -1136,6 +1157,5 @@ namespace Microsoft.Maui.TestCases.Tests
 			App.WaitForElementTillPageNavigationSettled("SliderControl");
 			VerifyScreenshot(tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
-
 	}
 }
