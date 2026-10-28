@@ -18,6 +18,7 @@
   <!-- NOTE: By default the UseMaterial3 flag value is false. If you change the UseMaterial3 flag, you MUST delete the artifacts folder 
        and rebuild the entire codebase using: dotnet build ./Microsoft.Maui.BuildTasks.slnf -->
     <UseMaterial3>false</UseMaterial3>
+    <ValidateXcodeVersion>false</ValidateXcodeVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -37,6 +38,11 @@
     <IlcTreatWarningsAsErrors>false</IlcTreatWarningsAsErrors>
     <WarningsNotAsErrors>$(WarningsNotAsErrors);IL3050</WarningsNotAsErrors>
     <DefineConstants>$(DefineConstants);NATIVE_AOT</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' and $(TargetFramework.Contains('-maccatalyst')) and '$(CI)' != 'true' and '$(TF_BUILD)' != 'true' and '$(_UseNativeAot)' != 'true' and '$(PublishAot)' != 'true'">
+    <!-- Disable trimming for the app as well as framework assemblies in local Debug builds. -->
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(UseMaui)' != 'true' ">

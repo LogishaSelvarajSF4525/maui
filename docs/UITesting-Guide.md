@@ -494,16 +494,67 @@ dotnet cake eng/devices/android.cake --target=uitest --test-filter="FullyQualifi
 
 ### Visual Studio
 
-1. Build test project (TestCases.Shared.Tests.csproj)
+1. Build the platform test project (for example, `TestCases.iOS.Tests/Controls.TestCases.iOS.Tests.csproj`).
 2. Tests appear in Test Explorer
 3. Right-click and run
 
 ### Visual Studio Code
 
-1. Install C# Dev Kit with .NET MAUI Extension
-2. Build test project first
-3. Open Testing panel
-4. Click play icon next to test
+1. Install C# Dev Kit and the .NET MAUI extension.
+2. Build and deploy `TestCases.HostApp` for the target device. The test runner does not build or deploy the host app.
+3. Build the corresponding NUnit project:
+
+   ```bash
+   dotnet build src/Controls/tests/TestCases.iOS.Tests/Controls.TestCases.iOS.Tests.csproj
+   dotnet build src/Controls/tests/TestCases.Mac.Tests/Controls.TestCases.Mac.Tests.csproj
+   dotnet build src/Controls/tests/TestCases.Android.Tests/Controls.TestCases.Android.Tests.csproj
+   ```
+
+   `TestCases.Shared.Tests` contains shared sources, not a runnable test assembly.
+
+4. Create `.vscode/uitests.local.runsettings` (ignored by Git), replacing the example values with local device identifiers and the built Mac app path:
+
+   ```xml
+   <?xml version="1.0" encoding="utf-8"?>
+   <RunSettings>
+     <RunConfiguration>
+       <MaxCpuCount>1</MaxCpuCount>
+       <EnvironmentVariables>
+         <IOS_DEVICE_UDID>ios-simulator-uuid</IOS_DEVICE_UDID>
+         <IOS_HEADLESS>true</IOS_HEADLESS>
+         <ANDROID_DEVICE_UDID>emulator-5554</ANDROID_DEVICE_UDID>
+         <MAC_APP_PATH>/absolute/path/to/Controls.TestCases.HostApp.app</MAC_APP_PATH>
+       </EnvironmentVariables>
+     </RunConfiguration>
+   </RunSettings>
+   ```
+
+   Find devices with `xcrun simctl list devices available` and `adb devices`.
+   Platform-specific `IOS_DEVICE_UDID` and `ANDROID_DEVICE_UDID` take precedence over `DEVICE_UDID`.
+   `IOS_HEADLESS` and `ANDROID_HEADLESS` take precedence over `HEADLESS`; unset headless options default to `false`.
+   Headless iOS execution avoids requiring the Simulator GUI app, but still requires an installed simulator runtime and WebDriverAgent prerequisites.
+
+5. The repository's VS Code settings select this runsettings file and enable C# Dev Kit's experimental lightweight Test Explorer (`dotnet.testWindow.enableNextTest`).
+   Run **Developer: Reload Window** after changing this startup setting, then refresh the Testing panel.
+   The legacy Test Explorer may not apply `dotnet.unitTests.runSettingsPath`.
+6. Select a test under the desired platform project and run it. Run platforms sequentially, not with **Run All** across projects: the Appium test hosts share port 4723.
+
+For Android, use a standalone host APK rather than an app waiting for an attached debugger:
+
+```bash
+dotnet build src/Controls/tests/TestCases.HostApp/Controls.TestCases.HostApp.csproj -f net11.0-android -p:EmbedAssembliesIntoApk=true
+adb -s emulator-5554 install -r artifacts/bin/Controls.TestCases.HostApp/Debug/net11.0-android/com.microsoft.maui.uitests-Signed.apk
+```
+
+For MacCatalyst, enable Accessibility access for **Xcode Helper** in macOS System Settings and accept any UI-automation authorization prompts.
+WebDriverAgent reporting "Timed out while enabling automation mode" indicates an environment authorization blocker, not a test assertion failure.
+If an Apple preview SDK leaves an edited host manifest out of the app bundle, rebuild the host project for the target framework before testing.
+
+To check the same configuration independently of Test Explorer:
+
+```bash
+dotnet test src/Controls/tests/TestCases.iOS.Tests/Controls.TestCases.iOS.Tests.csproj --no-build --settings .vscode/uitests.local.runsettings --filter "FullyQualifiedName~Issue11311"
+```
 
 ## Best Practices
 

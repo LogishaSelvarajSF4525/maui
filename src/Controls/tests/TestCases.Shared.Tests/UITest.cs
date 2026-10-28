@@ -94,7 +94,7 @@ namespace Microsoft.Maui.TestCases.Tests
 					config.SetProperty("Headless", bool.Parse(Environment.GetEnvironmentVariable("HEADLESS") ?? "false"));
 					break;
 				case TestDevice.iOS:
-					string udid = Environment.GetEnvironmentVariable("DEVICE_UDID") ?? "";
+					string udid = Environment.GetEnvironmentVariable("DEVICE_UDID") ?? "626E1C9E-9DB7-4A4F-B5FD-2F75BA4D4451";
 					if (!string.IsNullOrEmpty(udid))
 					{
 						config.SetProperty("Udid", udid);

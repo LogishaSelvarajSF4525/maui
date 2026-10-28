@@ -3,6 +3,11 @@
   <Import Condition="'$(EnvironmentBuildPropsImported)' != 'True'" Project="$(MSBuildThisFileDirectory)eng\Environment.Build.props" />
 
   <PropertyGroup>
+    <!-- Capture the repository version before platform SDKs override the runtime reference version. -->
+    <MicrosoftDotNetNPackageVersion>$(MicrosoftNETCoreAppRefPackageVersion)</MicrosoftDotNetNPackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- Detailed trimmer warnings, if present -->
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
@@ -85,6 +90,12 @@
     <_MauiTargetPlatformIsWindows Condition="$(_MauiTargetPlatformIdentifier.Contains('windows')) == 'True'">True</_MauiTargetPlatformIsWindows>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <Registrar>managed-static</Registrar>
+    <PrepareAssemblies>false</PrepareAssemblies>
+    <PostProcessAssemblies>false</PostProcessAssemblies>
+  </PropertyGroup>
+
   <!-- Try determine which .NET workloads are installed -->
   <PropertyGroup Condition="'$(CI)' != 'true' and '$(TF_BUILD)' != 'true'">
     <DotNetWorkloadVersionRegex>\d+\.\d+\.\d+(-[a-z]+[\.\d+]+)?</DotNetWorkloadVersionRegex>
@@ -147,16 +158,16 @@
   <!-- version number information -->
   <PropertyGroup>
     <!-- Default versions from the SDKs (update when there is a new TFM version) -->
-    <IosTargetFrameworkVersionSdkDefault>27.0</IosTargetFrameworkVersionSdkDefault>
-    <TvosTargetFrameworkVersionSdkDefault>27.0</TvosTargetFrameworkVersionSdkDefault>
-    <MacCatalystTargetFrameworkVersionSdkDefault>27.0</MacCatalystTargetFrameworkVersionSdkDefault>
-    <MacosTargetFrameworkVersionSdkDefault>27.0</MacosTargetFrameworkVersionSdkDefault>
+    <IosTargetFrameworkVersionSdkDefault>26.5</IosTargetFrameworkVersionSdkDefault>
+    <TvosTargetFrameworkVersionSdkDefault>26.5</TvosTargetFrameworkVersionSdkDefault>
+    <MacCatalystTargetFrameworkVersionSdkDefault>26.5</MacCatalystTargetFrameworkVersionSdkDefault>
+    <MacosTargetFrameworkVersionSdkDefault>26.5</MacosTargetFrameworkVersionSdkDefault>
     <AndroidTargetFrameworkVersionSdkDefault>37.0</AndroidTargetFrameworkVersionSdkDefault>
     <!-- Current .NET -->
-    <IosTargetFrameworkVersion>27.0</IosTargetFrameworkVersion>
-    <TvosTargetFrameworkVersion>27.0</TvosTargetFrameworkVersion>
-    <MacCatalystTargetFrameworkVersion>27.0</MacCatalystTargetFrameworkVersion>
-    <MacosTargetFrameworkVersion>27.0</MacosTargetFrameworkVersion>
+    <IosTargetFrameworkVersion>26.5</IosTargetFrameworkVersion>
+    <TvosTargetFrameworkVersion>26.5</TvosTargetFrameworkVersion>
+    <MacCatalystTargetFrameworkVersion>26.5</MacCatalystTargetFrameworkVersion>
+    <MacosTargetFrameworkVersion>26.5</MacosTargetFrameworkVersion>
     <AndroidTargetFrameworkVersion>37.0</AndroidTargetFrameworkVersion>
     <WindowsTargetFrameworkVersion>10.0.19041.0</WindowsTargetFrameworkVersion>
     <Windows2TargetFrameworkVersion>10.0.20348.0</Windows2TargetFrameworkVersion>
