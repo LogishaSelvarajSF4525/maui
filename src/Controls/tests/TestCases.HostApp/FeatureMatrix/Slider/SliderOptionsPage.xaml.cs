@@ -16,6 +16,8 @@ namespace Maui.Controls.Sample
 			InitializeComponent();
 			_viewModel = viewModel;
 			BindingContext = _viewModel;
+			SetHorizontalOptionsRadioButton(_viewModel.HorizontalOptions);
+			SetVerticalOptionsRadioButton(_viewModel.VerticalOptions);
 		}
 
 		private void ApplyButton_Clicked(object sender, EventArgs e)
@@ -128,6 +130,52 @@ namespace Maui.Controls.Sample
 			{
 				_viewModel.Opacity = opacity;
 			}
+		}
+
+		private void OnHorizontalOptionsCheckedChanged(object sender, CheckedChangedEventArgs e)
+		{
+			if (e.Value && sender is RadioButton radioButton)
+				_viewModel.HorizontalOptions = GetLayoutOptions(radioButton);
+		}
+
+		private void OnVerticalOptionsCheckedChanged(object sender, CheckedChangedEventArgs e)
+		{
+			if (e.Value && sender is RadioButton radioButton)
+				_viewModel.VerticalOptions = GetLayoutOptions(radioButton);
+		}
+
+		private static LayoutOptions GetLayoutOptions(RadioButton radioButton) =>
+			radioButton.Content?.ToString() switch
+			{
+				"Start" => LayoutOptions.Start,
+				"Center" => LayoutOptions.Center,
+				"End" => LayoutOptions.End,
+				"Fill" => LayoutOptions.Fill,
+				_ => throw new ArgumentOutOfRangeException(nameof(radioButton), radioButton.Content, "Unsupported layout option.")
+			};
+
+		private void SetHorizontalOptionsRadioButton(LayoutOptions layoutOptions)
+		{
+			if (layoutOptions == LayoutOptions.Start)
+				HorizontalOptionsStartRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.End)
+				HorizontalOptionsEndRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.Fill)
+				HorizontalOptionsFillRadio.IsChecked = true;
+			else
+				HorizontalOptionsCenterRadio.IsChecked = true;
+		}
+
+		private void SetVerticalOptionsRadioButton(LayoutOptions layoutOptions)
+		{
+			if (layoutOptions == LayoutOptions.Start)
+				VerticalOptionsStartRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.End)
+				VerticalOptionsEndRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.Fill)
+				VerticalOptionsFillRadio.IsChecked = true;
+			else
+				VerticalOptionsCenterRadio.IsChecked = true;
 		}
 	}
 }
