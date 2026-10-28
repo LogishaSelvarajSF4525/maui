@@ -25,6 +25,8 @@ namespace Maui.Controls.Sample
 		private double _heightRequest = -1;
 		private double _widthRequest = -1;
 		private double _opacity = 1.0;
+		private LayoutOptions _horizontalOptions = LayoutOptions.Fill;
+		private LayoutOptions _verticalOptions = LayoutOptions.Fill;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -53,6 +55,8 @@ namespace Maui.Controls.Sample
 			HeightRequest = -1;
 			WidthRequest = -1;
 			Opacity = 1.0;
+			HorizontalOptions = LayoutOptions.Fill;
+			VerticalOptions = LayoutOptions.Fill;
 			ValueChangedStatus = "Not Raised";
 			OldValue = 0;
 			NewValue = 0;
@@ -327,6 +331,32 @@ namespace Maui.Controls.Sample
 				if (_opacity != value)
 				{
 					_opacity = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public LayoutOptions HorizontalOptions
+		{
+			get => _horizontalOptions;
+			set
+			{
+				if (_horizontalOptions != value)
+				{
+					_horizontalOptions = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public LayoutOptions VerticalOptions
+		{
+			get => _verticalOptions;
+			set
+			{
+				if (_verticalOptions != value)
+				{
+					_verticalOptions = value;
 					OnPropertyChanged();
 				}
 			}

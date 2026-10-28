@@ -61,6 +61,8 @@ namespace Maui.Controls.Sample
 			slider.SetBinding(VisualElement.HeightRequestProperty, new Binding("HeightRequest"));
 			slider.SetBinding(VisualElement.WidthRequestProperty, new Binding("WidthRequest"));
 			slider.SetBinding(VisualElement.OpacityProperty, new Binding("Opacity"));
+			slider.SetBinding(View.HorizontalOptionsProperty, new Binding("HorizontalOptions"));
+			slider.SetBinding(View.VerticalOptionsProperty, new Binding("VerticalOptions"));
 
 			slider.ValueChanged += OnSliderValueChanged;
 
