@@ -93,38 +93,6 @@
         <Button Text="Add Image" Clicked="ThumbImageSourceButton_Clicked" WidthRequest="100" HorizontalOptions="Start" AutomationId="ThumbImageSourceButton"/>
         <Button Text="Reset" Clicked="ThumbImageResetButton_Clicked" WidthRequest="100" HorizontalOptions="Start" AutomationId="ThumbImageResetButton"/>
       </StackLayout>
-      <!-- Horizontal Options -->
-      <Label Text="Horizontal Options:" FontSize="11"/>
-      <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
-        <RadioButton x:Name="HorizontalOptionsStartRadio"
-                     Grid.Row="0" Grid.Column="0"
-                     FontSize="11"
-                     AutomationId="HorizontalOptionsStartRadio"
-                     GroupName="HorizontalOptions"
-                     Content="Start"
-                     CheckedChanged="OnHorizontalOptionsCheckedChanged" />
-        <RadioButton x:Name="HorizontalOptionsCenterRadio"
-                     Grid.Row="0" Grid.Column="1"
-                     FontSize="11"
-                     AutomationId="HorizontalOptionsCenterRadio"
-                     GroupName="HorizontalOptions"
-                     Content="Center"
-                     CheckedChanged="OnHorizontalOptionsCheckedChanged" />
-        <RadioButton x:Name="HorizontalOptionsEndRadio"
-                     Grid.Row="1" Grid.Column="0"
-                     FontSize="11"
-                     AutomationId="HorizontalOptionsEndRadio"
-                     GroupName="HorizontalOptions"
-                     Content="End"
-                     CheckedChanged="OnHorizontalOptionsCheckedChanged" />
-        <RadioButton x:Name="HorizontalOptionsFillRadio"
-                     Grid.Row="1" Grid.Column="1"
-                     FontSize="11"
-                     AutomationId="HorizontalOptionsFillRadio"
-                     GroupName="HorizontalOptions"
-                     Content="Fill"
-                     CheckedChanged="OnHorizontalOptionsCheckedChanged" />
-      </Grid>
       <!-- Vertical Options -->
       <Label Text="Vertical Options:" FontSize="11"/>
       <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">

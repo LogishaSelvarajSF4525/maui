@@ -16,7 +16,6 @@ namespace Maui.Controls.Sample
 			InitializeComponent();
 			_viewModel = viewModel;
 			BindingContext = _viewModel;
-			SetHorizontalOptionsRadioButton(_viewModel.HorizontalOptions);
 			SetVerticalOptionsRadioButton(_viewModel.VerticalOptions);
 		}
 
@@ -132,12 +131,6 @@ namespace Maui.Controls.Sample
 			}
 		}
 
-		private void OnHorizontalOptionsCheckedChanged(object sender, CheckedChangedEventArgs e)
-		{
-			if (e.Value && sender is RadioButton radioButton)
-				_viewModel.HorizontalOptions = GetLayoutOptions(radioButton);
-		}
-
 		private void OnVerticalOptionsCheckedChanged(object sender, CheckedChangedEventArgs e)
 		{
 			if (e.Value && sender is RadioButton radioButton)
@@ -153,18 +146,6 @@ namespace Maui.Controls.Sample
 				"Fill" => LayoutOptions.Fill,
 				_ => throw new ArgumentOutOfRangeException(nameof(radioButton), radioButton.Content, "Unsupported layout option.")
 			};
-
-		private void SetHorizontalOptionsRadioButton(LayoutOptions layoutOptions)
-		{
-			if (layoutOptions == LayoutOptions.Start)
-				HorizontalOptionsStartRadio.IsChecked = true;
-			else if (layoutOptions == LayoutOptions.End)
-				HorizontalOptionsEndRadio.IsChecked = true;
-			else if (layoutOptions == LayoutOptions.Fill)
-				HorizontalOptionsFillRadio.IsChecked = true;
-			else
-				HorizontalOptionsCenterRadio.IsChecked = true;
-		}
 
 		private void SetVerticalOptionsRadioButton(LayoutOptions layoutOptions)
 		{

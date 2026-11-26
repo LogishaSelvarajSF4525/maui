@@ -39,7 +39,7 @@
               WidthRequest="{Binding WidthRequest}"
               Opacity="{Binding Opacity}"
               VerticalOptions="{Binding VerticalOptions}"
-              HorizontalOptions="{Binding HorizontalOptions}"
+              HorizontalOptions="Fill"
               Margin="0,100,0,100"
               AutomationId="SliderControl"
               ValueChanged="OnSliderValueChanged"/>

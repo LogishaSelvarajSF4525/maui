@@ -1093,31 +1093,21 @@ namespace Microsoft.Maui.TestCases.Tests
 		}
 #endif
 
-		[Test, Order(71)]
-		public void Slider_HorizontalOptionsRadioButtons_ChangeAlignment()
+		[TestCase("Start")]
+		[TestCase("Center")]
+		[TestCase("End")]
+		[Order(72)]
+		public void Slider_SetVerticalOptions_VerifyVisualState(string verticalOption)
 		{
 			App.WaitForElement("Options");
 			App.Tap("Options");
-			App.WaitForElement("WidthRequestEntry");
-			App.EnterText("WidthRequestEntry", "120");
-			App.PressEnter();
-			App.ScrollTo("HorizontalOptionsStartRadio");
-			App.Tap("HorizontalOptionsStartRadio");
+			App.ScrollTo($"VerticalOptions{verticalOption}Radio");
+			App.Tap($"VerticalOptions{verticalOption}Radio");
+			App.WaitForElement("Apply");
 			App.Tap("Apply");
 			App.WaitForElementTillPageNavigationSettled("SliderControl");
-			var startX = App.FindElement("SliderControl").GetRect().X;
-
-			App.Tap("Options");
-			App.WaitForElement("WidthRequestEntry");
-			App.EnterText("WidthRequestEntry", "120");
-			App.PressEnter();
-			App.ScrollTo("HorizontalOptionsEndRadio");
-			App.Tap("HorizontalOptionsEndRadio");
-			App.Tap("Apply");
-			App.WaitForElementTillPageNavigationSettled("SliderControl");
-			var endX = App.FindElement("SliderControl").GetRect().X;
-
-			Assert.That(endX, Is.GreaterThan(startX));
+			VerifyScreenshot($"Slider_VerticalOptions{verticalOption}_VerifyVisualState",
+				tolerance: 0.5, retryTimeout: TimeSpan.FromSeconds(2));
 		}
 	}
 }
