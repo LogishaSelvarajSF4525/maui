@@ -16,6 +16,7 @@ namespace Maui.Controls.Sample
 			InitializeComponent();
 			_viewModel = viewModel;
 			BindingContext = _viewModel;
+			SetVerticalOptionsRadioButton(_viewModel.VerticalOptions);
 		}
 
 		private void ApplyButton_Clicked(object sender, EventArgs e)
@@ -104,6 +105,58 @@ namespace Maui.Controls.Sample
 		private void ThumbImageResetButton_Clicked(object sender, EventArgs e)
 		{
 			_viewModel.ThumbImageSource = null;
+		}
+
+		private void OnHeightRequestChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(HeightRequestEntry.Text, out double height))
+			{
+				_viewModel.HeightRequest = height;
+			}
+		}
+
+		private void OnWidthRequestChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(WidthRequestEntry.Text, out double width))
+			{
+				_viewModel.WidthRequest = width;
+			}
+		}
+
+		private void OnOpacityChanged(object sender, TextChangedEventArgs e)
+		{
+			if (double.TryParse(OpacityEntry.Text, out double opacity))
+			{
+				_viewModel.Opacity = opacity;
+			}
+		}
+
+		private void OnVerticalOptionsCheckedChanged(object sender, CheckedChangedEventArgs e)
+		{
+			if (e.Value && sender is RadioButton radioButton)
+				_viewModel.VerticalOptions = GetLayoutOptions(radioButton);
+		}
+
+		private static LayoutOptions GetLayoutOptions(RadioButton radioButton) =>
+			radioButton.Content?.ToString() switch
+			{
+				"Start" => LayoutOptions.Start,
+				"Center" => LayoutOptions.Center,
+				"End" => LayoutOptions.End,
+				"Fill" => LayoutOptions.Fill,
+				_ => throw new ArgumentOutOfRangeException(nameof(radioButton), radioButton.Content, "Unsupported layout option.")
+			};
+
+		private void SetVerticalOptionsRadioButton(LayoutOptions layoutOptions)
+		{
+			if (layoutOptions == LayoutOptions.Start)
+				VerticalOptionsStartRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.End)
+				VerticalOptionsEndRadio.IsChecked = true;
+			else if (layoutOptions == LayoutOptions.Fill)
+				VerticalOptionsFillRadio.IsChecked = true;
+			else
+				VerticalOptionsCenterRadio.IsChecked = true;
 		}
 	}
 }

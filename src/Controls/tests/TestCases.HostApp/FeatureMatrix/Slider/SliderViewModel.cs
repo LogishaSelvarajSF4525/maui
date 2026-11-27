@@ -22,6 +22,10 @@ namespace Maui.Controls.Sample
 		private string _dragStartStatus;
 		private string _dragCompletedStatus;
 		private bool _isEventStatusLabelVisible = false;
+		private double _heightRequest = -1;
+		private double _widthRequest = -1;
+		private double _opacity = 1.0;
+		private LayoutOptions _verticalOptions = LayoutOptions.Fill;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,6 +33,31 @@ namespace Maui.Controls.Sample
 		{
 			DragStartedCommand = new Command(OnDragStarted);
 			DragCompletedCommand = new Command(OnDragCompleted);
+		}
+
+		public void Reset()
+		{
+			Minimum = 0;
+			Maximum = 1;
+			Value = 0;
+			ThumbColor = null;
+			MinTrackColor = null;
+			MaxTrackColor = null;
+			BackgroundColor = null;
+			FlowDirection = FlowDirection.LeftToRight;
+			IsEnabled = true;
+			IsVisible = true;
+			ThumbImageSource = null;
+			DragStartStatus = null;
+			DragCompletedStatus = null;
+			IsEventStatusLabelVisible = false;
+			HeightRequest = -1;
+			WidthRequest = -1;
+			Opacity = 1.0;
+			VerticalOptions = LayoutOptions.Fill;
+			ValueChangedStatus = "Not Raised";
+			OldValue = 0;
+			NewValue = 0;
 		}
 
 		public double Minimum
@@ -265,6 +294,58 @@ namespace Maui.Controls.Sample
 		}
 
 
+
+		public double HeightRequest
+		{
+			get => _heightRequest;
+			set
+			{
+				if (_heightRequest != value)
+				{
+					_heightRequest = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public double WidthRequest
+		{
+			get => _widthRequest;
+			set
+			{
+				if (_widthRequest != value)
+				{
+					_widthRequest = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public double Opacity
+		{
+			get => _opacity;
+			set
+			{
+				if (_opacity != value)
+				{
+					_opacity = value;
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		public LayoutOptions VerticalOptions
+		{
+			get => _verticalOptions;
+			set
+			{
+				if (_verticalOptions != value)
+				{
+					_verticalOptions = value;
+					OnPropertyChanged();
+				}
+			}
+		}
 
 		public ICommand DragStartedCommand { get; }
 		public ICommand DragCompletedCommand { get; }
